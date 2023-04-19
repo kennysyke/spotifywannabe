@@ -12,7 +12,7 @@ import React from 'react';
 /> */
 }
 
-export function PlaylistItem(props) {
+function PlaylistItem(props) {
   return (
     <div className="playlist__item">
       <div className="playlist__track track">
@@ -48,3 +48,5 @@ export function PlaylistItem(props) {
     </div>
   );
 }
+
+export default PlaylistItem;
