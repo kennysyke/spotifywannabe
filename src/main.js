@@ -1,10 +1,10 @@
 import React from 'react';
 import logo from './img/logo.png';
-import './App.css';
-import './styles.css';
-import { PlaylistItem } from './playlistitem';
+
+import '/css/style.css';
+import PlaylistItem from './playlistitem';
 import SidebarPlaylist from './SidebarPlaylist';
-import { Bar } from './bar';
+import Bar from './bar';
 
 const playlists = [
   {
@@ -150,3 +150,5 @@ function SideBarPersonal() {
     </div>
   );
 }
+
+export default APP;
