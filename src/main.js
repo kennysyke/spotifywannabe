@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './img/logo.png';
 
-import '/css/style.css';
+import './/css/style.css';
 import PlaylistItem from './playlistitem';
 import SidebarPlaylist from './SidebarPlaylist';
 import Bar from './bar';
