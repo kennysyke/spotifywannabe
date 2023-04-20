@@ -1,15 +1,15 @@
 import React from 'react';
 
 {
-  /* <PlaylistItem
-  trackTitle="My Favorite Song"
-  trackLink="http://example.com/my-favorite-song"
-  authorName="The Best Artist"
-  authorLink="http://example.com/the-best-artist"
-  albumName="The Greatest Hits"
-  albumLink="http://example.com/the-greatest-hits"
-  trackDuration="3:30"
-/> */
+  //   <PlaylistItem
+  //   trackTitle="My Favorite Song"
+  //   trackLink="http://example.com/my-favorite-song"
+  //   authorName="The Best Artist"
+  //   authorLink="http://example.com/the-best-artist"
+  //   albumName="The Greatest Hits"
+  //   albumLink="http://example.com/the-greatest-hits"
+  //   trackDuration="3:30"
+  // />
 }
 
 function PlaylistItem(props) {
