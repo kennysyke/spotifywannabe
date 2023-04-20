@@ -1,5 +1,6 @@
 import React from 'react';
-import TrackPlay from './trackplay';
+import TrackPlay from './trackPlay';
+import Sprite from './img/icon/sprite.svg';
 
 function Bar() {
   return (
@@ -9,7 +10,7 @@ function Bar() {
         <div className="bar__player-block">
           <div className="bar__player player">
             <PlayerControls />
-            <TrackPlay />
+            <TrackPlay author="Linkin Park" album="Meteora" />
           </div>
           <Volume />
         </div>
@@ -28,7 +29,8 @@ function PlayerControls() {
       <PlayerBtnPrev />
       <PlayerBtnPlay />
       <PlayerBtnNext />
-      <PlayerBtnIcon />
+      <PlayerBtnRepeat />
+      <PlayerBtnShuffle />
     </div>
   );
 }
@@ -37,7 +39,7 @@ function PlayerBtnPrev() {
   return (
     <div className="player__btn-prev">
       <svg className="player__btn-prev-svg" alt="prev">
-        <use xlinkHref="img/icon/sprite.svg#icon-prev"></use>
+        <use xlinkHref={`${Sprite}#icon-prev`}></use>
       </svg>
     </div>
   );
@@ -47,7 +49,7 @@ function PlayerBtnPlay() {
   return (
     <div className="player__btn-play _btn">
       <svg className="player__btn-play-svg" alt="play">
-        <use xlinkHref="img/icon/sprite.svg#icon-play"></use>
+        <use xlinkHref={`${Sprite}#icon-play`}></use>
       </svg>
     </div>
   );
@@ -57,27 +59,28 @@ function PlayerBtnNext() {
   return (
     <div className="player__btn-next">
       <svg className="player__btn-next-svg" alt="next">
-        <use xlinkHref="img/icon/sprite.svg#icon-next"></use>
+        <use xlinkHref={`${Sprite}#icon-next`}></use>
       </svg>
     </div>
   );
 }
 
-function PlayerBtnIcon() {
+function PlayerBtnRepeat() {
   return (
-    <div className="player__btn-icon">
-      <div className="player__btn-repeat _btn-icon">
-        <svg className="player__btn-repeat-svg" alt="repeat">
-          <use xlinkHref="img/icon/sprite.svg#icon-repeat"></use>
-        </svg>
-      </div>
-      <div className="player__btn-shuffle _btn-icon">
-        <svg className="player__btn-shuffle-svg" alt="shuffle">
-          <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
-        </svg>
-      </div>
+    <div className="player__btn-repeat _btn-icon">
+      <svg className="player__btn-repeat-svg" alt="repeat">
+        <use xlinkHref={`${Sprite}#icon-repeat`}></use>
+      </svg>
     </div>
   );
+}
+
+function PlayerBtnShuffle() {
+  <div className="player__btn-shuffle _btn-icon">
+    <svg className="player__btn-shuffle-svg" alt="shuffle">
+      <use xlinkHref={`${Sprite}#icon-shuffle`}></use>
+    </svg>
+  </div>;
 }
 
 function Volume() {
@@ -86,7 +89,7 @@ function Volume() {
       <div className="volume__content">
         <div className="volume__image">
           <svg className="volume__svg" alt="volume">
-            <use xlinkHref="img/icon/sprite.svg#icon-volume" />
+            <use xlinkHref={`${Sprite}#icon-volume`} />
           </svg>
         </div>
         <div className="volume__progress _btn">

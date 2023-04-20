@@ -37,7 +37,7 @@ ul li {
 html,
 body {
   width: 100%;
-  height: 100%;
+  height: 70%;
   font-family: 'StratosSkyeng', sans-serif;
   color: #FFFFFF;
 }
@@ -148,6 +148,10 @@ body {
 .nav__menu {
   display: block;
   visibility: visible;
+}
+
+.open {
+  display: none;
 }
 
 .logo__image {

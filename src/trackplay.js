@@ -1,10 +1,11 @@
 import React from 'react';
+import Sprite from './img/icon/sprite.svg';
 
 const TrackPlayImage = () => {
   return (
     <div className="track-play__image">
       <svg className="track-play__svg" alt="music">
-        <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+        <use xlinkHref={`${Sprite}#icon-note`}></use>
       </svg>
     </div>
   );
@@ -32,7 +33,7 @@ const TrackPlayAlbum = ({ album }) => {
 
 const TrackPlay = ({ author, album }) => {
   return (
-    <div className="track-play">
+    <div className="player__track-play track-play">
       <div className="track-play__contain">
         <TrackPlayImage />
         <TrackPlayAuthor author={author} />
@@ -42,12 +43,12 @@ const TrackPlay = ({ author, album }) => {
       <div className="track-play__like-dis">
         <div className="track-play__like _btn-icon">
           <svg className="track-play__like-svg" alt="like">
-            <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+            <use xlinkHref={`${Sprite}#icon-like`}></use>
           </svg>
         </div>
         <div className="track-play__dislike _btn-icon">
           <svg className="track-play__dislike-svg" alt="dislike">
-            <use xlinkHref="img/icon/sprite.svg#icon-dislike"></use>
+            <use xlinkHref={`${Sprite}#icon-dislike`}></use>
           </svg>
         </div>
       </div>
