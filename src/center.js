@@ -1,13 +1,15 @@
 import React from 'react';
-import Search from './search';
-import MusicSearch from './musicSearch';
-import Content from './content';
-import SideBarPersonal from './sidebarPersonal';
+import Search from './search.js';
+import MusicSearch from './musicSearch.js';
+import Content from './content.js';
+import SideBarPersonal from './sidebarPersonal.js';
 import SidebarPlaylist from './sidebarPlaylist';
 
 import playlist1 from './img/playlist01.png';
 import playlist2 from './img/playlist02.png';
 import playlist3 from './img/playlist03.png';
+
+console.log(SidebarPlaylist);
 
 const playlists = [
   {
@@ -26,6 +28,8 @@ const playlists = [
     alt: "day's playlist",
   },
 ];
+
+console.log(playlists);
 
 function Center() {
   return (

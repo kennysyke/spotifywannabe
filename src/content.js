@@ -1,6 +1,6 @@
 import React from 'react';
 import Sprite from './img/icon/sprite.svg';
-import PlaylistItem from './playlistItem';
+import PlaylistItem from './playlistItem.js';
 
 function Content() {
   return (
@@ -17,7 +17,7 @@ function Content() {
       </div>
       <div className="content__playlist playlist">
         <PlaylistItem
-          trackTitle="My Favorite Song"
+          trackTitle="My ertyujk Song"
           trackLink="http://example.com/my-favorite-song"
           authorName="The Best Artist"
           authorLink="http://example.com/the-best-artist"
@@ -45,6 +45,42 @@ function Content() {
         />
         <PlaylistItem
           trackTitle="My Favorite Song"
+          trackLink="http://example.com/my-favorite-song"
+          authorName="The Best Artist"
+          authorLink="http://example.com/the-best-artist"
+          albumName="The Greatest Hits"
+          albumLink="http://example.com/the-greatest-hits"
+          trackDuration="3:30"
+        />
+        <PlaylistItem
+          trackTitle="dfgh"
+          trackLink="http://example.com/my-favorite-song"
+          authorName="The Best Artist"
+          authorLink="http://example.com/the-best-artist"
+          albumName="The Greatest Hits"
+          albumLink="http://example.com/the-greatest-hits"
+          trackDuration="3:30"
+        />
+        <PlaylistItem
+          trackTitle="dfghj"
+          trackLink="http://example.com/my-favorite-song"
+          authorName="The Best Artist"
+          authorLink="http://example.com/the-best-artist"
+          albumName="The Greatest Hits"
+          albumLink="http://example.com/the-greatest-hits"
+          trackDuration="3:30"
+        />
+        <PlaylistItem
+          trackTitle="sdfgh"
+          trackLink="http://example.com/my-favorite-song"
+          authorName="The Best Artist"
+          authorLink="http://example.com/the-best-artist"
+          albumName="The Greatest Hits"
+          albumLink="http://example.com/the-greatest-hits"
+          trackDuration="3:30"
+        />
+        <PlaylistItem
+          trackTitle="sdfgh"
           trackLink="http://example.com/my-favorite-song"
           authorName="The Best Artist"
           authorLink="http://example.com/the-best-artist"

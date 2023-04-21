@@ -1,5 +1,5 @@
 import React from 'react';
-import TrackPlay from './trackPlay';
+import TrackPlay from './trackPlay.js';
 import Sprite from './img/icon/sprite.svg';
 
 function Bar() {
@@ -76,11 +76,13 @@ function PlayerBtnRepeat() {
 }
 
 function PlayerBtnShuffle() {
-  <div className="player__btn-shuffle _btn-icon">
-    <svg className="player__btn-shuffle-svg" alt="shuffle">
-      <use xlinkHref={`${Sprite}#icon-shuffle`}></use>
-    </svg>
-  </div>;
+  return (
+    <div className="player__btn-shuffle _btn-icon">
+      <svg className="player__btn-shuffle-svg" alt="shuffle">
+        <use xlinkHref={`${Sprite}#icon-shuffle`}></use>
+      </svg>
+    </div>
+  );
 }
 
 function Volume() {
