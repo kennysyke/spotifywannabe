@@ -1,9 +1,9 @@
 import React from 'react';
-import './/css/style.css';
+import '../css/style.css';
 
-import Header from './header.js';
-import Center from './center.js';
-import Bar from './bar.js';
+import Header from './header';
+import Center from './center';
+import Bar from './bar';
 import SideBar from './sideBar';
 
 function APP() {

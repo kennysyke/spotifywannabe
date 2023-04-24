@@ -2,9 +2,9 @@ import React from 'react';
 import SideBarPersonal from './sidebarPersonal';
 import SidebarPlaylist from './sidebarPlaylist';
 
-import playlist1 from './img/playlist01.png';
-import playlist2 from './img/playlist02.png';
-import playlist3 from './img/playlist03.png';
+import playlist1 from '../img/playlist01.png';
+import playlist2 from '../img/playlist02.png';
+import playlist3 from '../img/playlist03.png';
 
 const playlists = [
   {

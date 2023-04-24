@@ -1,5 +1,5 @@
 import React from 'react';
-import Sprite from './img/icon/sprite.svg';
+import Sprite from '../img/icon/sprite.svg';
 
 function Search() {
   return (

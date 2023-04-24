@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-import Sprite from './img/icon/sprite.svg';
+import Sprite from '../img/icon/sprite.svg';
 
 function PlaylistItem(props) {
   const [isLoading, setIsLoading] = useState(true);

@@ -1,6 +1,6 @@
 import React from 'react';
 // import DropdownMenu from './dropdownMenu.js';
-import DropDownComponent from './dropdownAll.js';
+import DropDownComponent from './dropdownAll';
 
 function MusicSearch() {
   return (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Sprite from './img/icon/sprite.svg';
+import Sprite from '../img/icon/sprite.svg';
 
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';

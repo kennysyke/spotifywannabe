@@ -1,6 +1,6 @@
 import React from 'react';
-import TrackPlay from './trackPlay.js';
-import Sprite from './img/icon/sprite.svg';
+import TrackPlay from './trackPlay';
+import Sprite from '../img/icon/sprite.svg';
 
 function Bar() {
   return (
