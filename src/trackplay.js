@@ -1,32 +1,79 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Sprite from './img/icon/sprite.svg';
 
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+
 const TrackPlayImage = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="track-play__image">
-      <svg className="track-play__svg" alt="music">
-        <use xlinkHref={`${Sprite}#icon-note`}></use>
-      </svg>
+      {isLoading ? (
+        <svg className="track-play__svg" alt="music">
+          <Skeleton width={18} height={17} />
+        </svg>
+      ) : (
+        <svg className="track-play__svg" alt="music">
+          <use xlinkHref={`${Sprite}#icon-note`}></use>
+        </svg>
+      )}
     </div>
   );
 };
 
 const TrackPlayAuthor = ({ author }) => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="track-play__author">
-      <a className="track-play__author-link" href="http://">
-        {author}
-      </a>
+      {isLoading ? (
+        <Skeleton width={49} />
+      ) : (
+        <a className="track-play__author-link" href="http://">
+          {author}
+        </a>
+      )}
     </div>
   );
 };
 
 const TrackPlayAlbum = ({ album }) => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="track-play__album">
-      <a className="track-play__album-link" href="http://">
-        {album}
-      </a>
+      {isLoading ? (
+        <Skeleton width={49} />
+      ) : (
+        <a className="track-play__album-link" href="http://">
+          {album}
+        </a>
+      )}
     </div>
   );
 };

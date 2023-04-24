@@ -1,13 +1,12 @@
 import React from 'react';
-import ArtistDropdown from './filterByArtist.js';
+// import DropdownMenu from './dropdownMenu.js';
+import DropDownComponent from './dropdownAll.js';
 
 function MusicSearch() {
   return (
     <div className="centerblock__filter filter">
       <div className="filter__title">Искать по:</div>
-      <ArtistDropdown />
-      <div className="filter__button button-year _btn-text">году выпуска</div>
-      <div className="filter__button button-genre _btn-text">жанру</div>
+      <DropDownComponent />
     </div>
   );
 }

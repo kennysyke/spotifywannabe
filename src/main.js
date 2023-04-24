@@ -4,8 +4,7 @@ import './/css/style.css';
 import Header from './header.js';
 import Center from './center.js';
 import Bar from './bar.js';
-
-// import filterByArtist from './filterByArtist';
+import SideBar from './sideBar';
 
 function APP() {
   return (
@@ -14,6 +13,7 @@ function APP() {
         <main className="main">
           <Header />
           <Center />
+          <SideBar />
         </main>
         <Bar />
         <footer className="footer"></footer>
