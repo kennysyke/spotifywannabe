@@ -2,20 +2,28 @@ import React from 'react';
 import Sprite from '../img/icon/sprite.svg';
 import PlaylistItem from './playlistItem';
 
+import styles from '../css/content.module.css';
+
 function Content() {
   return (
-    <div className="centerblock__content">
-      <div className="content__title playlist-title">
-        <div className="playlist-title__col col01">Трек</div>
-        <div className="playlist-title__col col02">ИСПОЛНИТЕЛЬ</div>
-        <div className="playlist-title__col col03">АЛЬБОМ</div>
-        <div className="playlist-title__col col04">
-          <svg className="playlist-title__svg" alt="time">
+    <div className={styles.centerblock__content}>
+      <div className={styles.content__title}>
+        <div className={`${styles.playlist_title__col} ${styles.col01}`}>
+          Трек
+        </div>
+        <div className={`${styles.playlist_title__col} ${styles.col02}`}>
+          ИСПОЛНИТЕЛЬ
+        </div>
+        <div className={`${styles.playlist_title__col} ${styles.col03}`}>
+          АЛЬБОМ
+        </div>
+        <div className={`${styles.playlist_title__col} ${styles.col04}`}>
+          <svg className={styles.playlist_title__svg} alt="time">
             <use xlinkHref={`${Sprite}#icon-watch`}></use>
           </svg>
         </div>
       </div>
-      <div className="content__playlist playlist">
+      <div className={styles.content__playlist}>
         <PlaylistItem
           trackTitle="My ertyujk Song"
           trackLink="http://example.com/my-favorite-song"
