@@ -1,11 +1,10 @@
 import React from 'react';
-import './/css/style.css';
+import '../css/style.css';
 
-import Header from './header.js';
-import Center from './center.js';
-import Bar from './bar.js';
-
-// import filterByArtist from './filterByArtist';
+import Header from './header';
+import Center from './center';
+import Bar from './bar';
+import SideBar from './sideBar';
 
 function APP() {
   return (
@@ -14,6 +13,7 @@ function APP() {
         <main className="main">
           <Header />
           <Center />
+          <SideBar />
         </main>
         <Bar />
         <footer className="footer"></footer>

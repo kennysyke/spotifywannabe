@@ -296,6 +296,7 @@ body {
   font-size: 16px;
   line-height: 24px;
   margin-right: 15px;
+  margin-bottom: 10px;
 }
 
 .filter__button {
@@ -306,6 +307,7 @@ body {
   border: 1px solid #FFFFFF;
   border-radius: 60px;
   padding: 6px 20px;
+  margin-bottom: 10px;
 }
 
 .filter__button:not(:last-child) {
@@ -872,4 +874,48 @@ body {
 
 .volume__progress-line {
   width: 109px;
+}
+
+.dropdown_content ul {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 34px;
+  gap: 20px;
+  position: absolute;
+  width: 248px;
+  max-height: 200px;
+  overflow: scroll;
+  background: #313131;
+  box-sizing: border-box;
+
+}
+/* .dropdown_content ul::-webkit-scrollbar {
+  width: 14px; /* ширина всей полосы прокрутки */
+/* } */
+/* .dropdown_content ul::-webkit-scrollbar-thumb {
+  border-right: 10px #313131 solid;
+  background-clip: padding-box;
+} */ 
+
+/* .dropdown_content ul::-webkit-scrollbar-track {
+    background: #4b4949;
+    border-right: 4px #313131 solid;
+    background-clip: padding-box;
+} */
+
+.dropdown_content ul::-webkit-scrollbar-thumb {
+  background: red;
+  border-right: 10px white solid;
+  background-clip: padding-box;
+} 
+
+ul li:hover {
+  color: #B672FF;
+  text-decoration-line: underline;
+}
+
+
+[type=radio] {
+  margin-right: 10px;
 }

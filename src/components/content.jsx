@@ -1,6 +1,6 @@
 import React from 'react';
-import Sprite from './img/icon/sprite.svg';
-import PlaylistItem from './playlistItem.js';
+import Sprite from '../img/icon/sprite.svg';
+import PlaylistItem from './playlistItem';
 
 function Content() {
   return (
