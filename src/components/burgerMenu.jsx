@@ -4,7 +4,7 @@ function BurgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleBurgerClick = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((prev) => !prev);
   };
 
   return (
@@ -14,10 +14,17 @@ function BurgerMenu() {
         <span className="burger__line"></span>
         <span className="burger__line"></span>
       </div>
+<<<<<<< Updated upstream
       <div className={`nav__menu menu ${isOpen ? 'open' : ''}`}>
         <ul className="menu__list">
           <li className="menu__item">
             <a href="http://" className="menu__link">
+=======
+      <div className={`${styles.nav__menu} menu ${isOpen ? styles.open : ''}`}>
+        <ul className={styles.menu__list}>
+          <li className={styles.menu__item}>
+            <a href="http://" className={styles.menu__link}>
+>>>>>>> Stashed changes
               Главное
             </a>
           </li>

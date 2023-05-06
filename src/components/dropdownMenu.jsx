@@ -17,11 +17,21 @@ function DropdownMenu({ label, items, open, onOpen }) {
   }
 
   return (
+<<<<<<< Updated upstream
     <div className="dropdown">
       <div className="filter__button _btn-text" onClick={handleButtonClick}>
+=======
+    <div className={styles.dropdown}>
+      <div
+        className={`${styles.filter__button} ${stylesBtn._btn_text} ${
+          open ? styles.active : ''
+        }`}
+        onClick={handleButtonClick}
+      >
+>>>>>>> Stashed changes
         {label}
       </div>
-      <div className="dropdown_content">
+      <div className={styles.dropdown_content}>
         {open && showMenu && (
           <ul>
             {label === 'году выпуска'
