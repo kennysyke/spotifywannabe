@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
+import styles from '../css/sidebarPersonal.module.css';
+
 function SideBarPersonal() {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -14,7 +16,7 @@ function SideBarPersonal() {
   }, []);
 
   return (
-    <div className="sidebar__personal">
+    <div className={styles.sidebar__personal}>
       {isLoading ? (
         <div>
           <Skeleton width={120} height={24} />
@@ -22,8 +24,8 @@ function SideBarPersonal() {
         </div>
       ) : (
         <div>
-          <p className="sidebar__personal-name">Sergey.Ivanov</p>
-          <div className="sidebar__avatar"></div>
+          <p className={styles.sidebar__personal_name}>Sergey.Ivanov</p>
+          <div className={styles.sidebar__avatar}></div>
         </div>
       )}
     </div>

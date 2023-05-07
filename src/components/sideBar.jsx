@@ -6,6 +6,8 @@ import playlist1 from '../img/playlist01.png';
 import playlist2 from '../img/playlist02.png';
 import playlist3 from '../img/playlist03.png';
 
+import styles from '../css/sideBar.module.css';
+
 const playlists = [
   {
     url: '#',
@@ -28,7 +30,7 @@ console.log(playlists);
 
 function SideBar() {
   return (
-    <div className="main__sidebar sidebar">
+    <div className={`${styles.main__sidebar} sidebar`}>
       <SideBarPersonal />
       <SidebarPlaylist playlists={playlists} />
     </div>

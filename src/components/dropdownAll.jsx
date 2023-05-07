@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import DropdownMenu from './dropdownMenu';
 
+import styles from '../css/dropdownAll.module.css';
+
 function DropDownComponent() {
   const artistItems = [
     'Artist 1',
@@ -31,8 +33,8 @@ function DropDownComponent() {
   }
 
   return (
-    <div className="centerblock__filter filter">
-      <div className="filter__title">Искать по:</div>
+    <div className={styles.centerblock__filter}>
+      <div className={styles.filter__title}>Искать по:</div>
       <DropdownMenu
         label="исполнителю"
         items={artistItems}

@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
+import styles from '../css/dropdownMenu.module.css';
+import stylesBtn from '../css/btn.module.css';
+
 function DropdownMenu({ label, items, open, onOpen }) {
   const [showMenu, setShowMenu] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -18,7 +21,10 @@ function DropdownMenu({ label, items, open, onOpen }) {
 
   return (
     <div className="dropdown">
-      <div className="filter__button _btn-text" onClick={handleButtonClick}>
+      <div
+        className={`${styles.filter__button} ${stylesBtn._btn_text}`}
+        onClick={handleButtonClick}
+      >
         {label}
       </div>
       <div className="dropdown_content">

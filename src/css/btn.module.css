@@ -1,0 +1,30 @@
+._btn_text:hover {
+    border-color: #D9B6FF;
+    color: #D9B6FF;
+    cursor: pointer;
+  }
+  
+  ._btn_icon:hover svg {
+    fill: transparent;
+    stroke: #ACACAC;
+    cursor: pointer;
+  }
+  
+  ._btn_text:active {
+    border-color: #AD61FF;
+    color: #AD61FF;
+    cursor: pointer;
+  }
+  
+  ._btn_icon:active svg {
+    fill: transparent;
+    stroke: #FFFFFF;
+    cursor: pointer;
+  }
+  
+  ._btn_icon:active .track_play__like_svg,
+  ._btn_icon:active .track_play__dislike_svg {
+    fill: #696969;
+    stroke: #FFFFFF;
+    cursor: pointer;
+  }

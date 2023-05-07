@@ -42,7 +42,7 @@ body {
   color: #FFFFFF;
 }
 
-.wrapper {
+/* .wrapper {
   width: 100%;
   min-height: 100%;
   overflow: hidden;
@@ -55,9 +55,9 @@ body {
   margin: 0 auto;
   position: relative;
   background-color: #181818;
-}
+} */
 
-._btn-text:hover {
+/* ._btn-text:hover {
   border-color: #D9B6FF;
   color: #D9B6FF;
   cursor: pointer;
@@ -86,9 +86,9 @@ body {
   fill: #696969;
   stroke: #FFFFFF;
   cursor: pointer;
-}
+} */
 
-.main {
+/* .main {
   -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
@@ -100,36 +100,36 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-}
+} */
 
-.main__nav {
+/* .main__nav {
   width: 244px;
   background-color: #181818;
   padding: 20px 0 20px 36px;
-}
+} */
 
-.main__centerblock {
+/* .main__centerblock {
   width: auto;
   -webkit-box-flex: 3;
       -ms-flex-positive: 3;
           flex-grow: 3;
   padding: 20px 40px 20px 111px;
-}
+} */
 
-.main__sidebar {
+/* .main__sidebar {
   max-width: 418px;
   padding: 20px 90px 20px 78px;
-}
+} */
 
-.nav__logo {
+/* .nav__logo {
   width: 113.33px;
   height: 43px;
   padding: 13px 0 13px 0;
   background-color: transparent;
   margin-bottom: 20px;
-}
+} */
 
-.nav__burger {
+/* .nav__burger {
   width: 20px;
   height: 36px;
   padding: 13px 0;
@@ -143,24 +143,24 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-}
+} */
 
-.nav__menu {
+/* .nav__menu {
   display: block;
   visibility: visible;
 }
 
 .open {
   display: none;
-}
+} */
 
-.logo__image {
+/* .logo__image {
   width: 113.33px;
   height: 17px;
   color: #181818;
-}
+} */
 
-.burger__line {
+/* .burger__line {
   display: inline-block;
   width: 100%;
   height: 1px;
@@ -181,9 +181,9 @@ body {
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-}
+} */
 
-.centerblock__search {
+/* .centerblock__search {
   width: 100%;
   border-bottom: 1px solid #4E4E4E;
   margin-bottom: 51px;
@@ -197,18 +197,18 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-}
+} */
 
-.centerblock__h2 {
+/* .centerblock__h2 {
   font-style: normal;
   font-weight: 400;
   font-size: 64px;
   line-height: 72px;
   letter-spacing: -0.8px;
   margin-bottom: 45px;
-}
+} */
 
-.centerblock__filter {
+/* .centerblock__filter {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -220,9 +220,9 @@ body {
       -ms-flex-align: center;
           align-items: center;
   margin-bottom: 51px;
-}
+} */
 
-.centerblock__content {
+/* .centerblock__content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -230,8 +230,8 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-}
-
+} */
+/* 
 .search__svg {
   width: 17px;
   height: 17px;
@@ -261,8 +261,8 @@ body {
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-}
-
+} */
+/* 
 .search__text:-ms-input-placeholder {
   background-color: transparent;
   color: #FFFFFF;
@@ -288,18 +288,18 @@ body {
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-}
+} */
 
-.filter__title {
+/* .filter__title {
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   margin-right: 15px;
   margin-bottom: 10px;
-}
+} */
 
-.filter__button {
+/* .filter__button {
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -312,8 +312,8 @@ body {
 
 .filter__button:not(:last-child) {
   margin-right: 10px;
-}
-
+} */
+/* 
 .content__title {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -374,9 +374,9 @@ body {
 .col04 {
   width: 60px;
   text-align: end;
-}
+} */
 
-.playlist__item {
+/* .playlist__item {
   width: 100%;
   display: block;
   margin-bottom: 12px;
@@ -396,8 +396,8 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-}
-
+} */
+/* 
 .track__title {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -434,8 +434,8 @@ body {
   height: 17px;
   fill: transparent;
   stroke: #4E4E4E;
-}
-
+} */
+/* 
 .track__title-link {
   font-style: normal;
   font-weight: 400;
@@ -469,9 +469,9 @@ body {
   line-height: 24px;
   color: #FFFFFF;
   text-align: left;
-}
+} */
 
-.track__album {
+/* .track__album {
   width: 245px;
 }
 
@@ -498,9 +498,9 @@ body {
   line-height: 24px;
   text-align: right;
   color: #696969;
-}
+} */
 
-.sidebar__personal {
+/* .sidebar__personal {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -517,7 +517,7 @@ body {
   padding: 12px 0 15px 0;
 }
 
-.sidebar__personal-name {
+.sidebar__personal_name {
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -531,9 +531,9 @@ body {
   height: 43px;
   background-color: #313131;
   border-radius: 50%;
-}
+} */
 
-.sidebar__block {
+/* .sidebar__block {
   height: 100%;
   padding: 240px 0 0 0;
   display: -webkit-box;
@@ -578,9 +578,9 @@ body {
 .sidebar__img {
   width: 100%;
   height: auto;
-}
+} */
 
-.bar {
+/* .bar {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -632,9 +632,9 @@ body {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-}
+} */
 
-.bar__volume-block {
+/* .bar__volume-block {
   width: auto;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -722,9 +722,9 @@ body {
   height: 12px;
   fill: transparent;
   stroke: #696969;
-}
+} */
 
-.player__track-play {
+/* .player__track-play {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -838,9 +838,9 @@ body {
   height: 13px;
   fill: transparent;
   stroke: #696969;
-}
+} */
 
-.volume__content {
+/* .volume__content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -874,9 +874,9 @@ body {
 
 .volume__progress-line {
   width: 109px;
-}
+} */
 
-.dropdown_content ul {
+/* .dropdown_content ul {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -889,7 +889,7 @@ body {
   background: #313131;
   box-sizing: border-box;
 
-}
+} */
 /* .dropdown_content ul::-webkit-scrollbar {
   width: 14px; /* ширина всей полосы прокрутки */
 /* } */
@@ -904,7 +904,7 @@ body {
     background-clip: padding-box;
 } */
 
-.dropdown_content ul::-webkit-scrollbar-thumb {
+/* .dropdown_content ul::-webkit-scrollbar-thumb {
   background: red;
   border-right: 10px white solid;
   background-clip: padding-box;
@@ -919,3 +919,4 @@ ul li:hover {
 [type=radio] {
   margin-right: 10px;
 }
+*/
