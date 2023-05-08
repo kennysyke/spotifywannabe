@@ -20,14 +20,16 @@ function DropdownMenu({ label, items, open, onOpen }) {
   }
 
   return (
-    <div className="dropdown">
+    <div className={styles.dropdown}>
       <div
-        className={`${styles.filter__button} ${stylesBtn._btn_text}`}
+        className={`${styles.filter__button} ${stylesBtn._btn_text} ${
+          open ? styles.active : ''
+        }`}
         onClick={handleButtonClick}
       >
         {label}
       </div>
-      <div className="dropdown_content">
+      <div className={styles.dropdown_content}>
         {open && showMenu && (
           <ul>
             {label === 'году выпуска'

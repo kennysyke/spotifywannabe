@@ -1,9 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppRoutes } from '../../routes';
+import styles from '../../css/login.module.css';
+import logoBlack from '../../img/logo_black.png';
+// import { AppRoutes } from '../../routes';
 
-function LoginForm() {
+function LoginForm({ setUser }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -18,8 +20,8 @@ function LoginForm() {
 
   const handleLogin = (event) => {
     event.preventDefault();
-    setUsername({ login: 'taradam' });
-    navigate('/account');
+    setUser({ login: username });
+    navigate('/');
   };
 
   const handleRegister = (event) => {
@@ -28,11 +30,13 @@ function LoginForm() {
   };
 
   return (
-    <div className="form">
-      <form>
-        <div className="input-container">
-          <AppRoutes />
+    <div className={styles.form_box}>
+      <form className={styles.form}>
+        {/* <div className={styles.form}> */}
+        <img className={styles.logo__image} src={logoBlack} alt="logo" />
+        <div className={styles.input_container}>
           <input
+            className={styles.input}
             type="text"
             id="username"
             placeholder="login"
@@ -40,6 +44,7 @@ function LoginForm() {
             onChange={handleUsernameChange}
           />
           <input
+            className={styles.input}
             type="password"
             id="password"
             placeholder="password"
@@ -47,10 +52,15 @@ function LoginForm() {
             onChange={handlePasswordChange}
           />
         </div>
-        <div className="button-container">
-          <button onClick={handleLogin}>Log in</button>
-          <button onClick={handleRegister}>Register</button>
+        <div className={styles.button_container}>
+          <button className={styles.login_button} onClick={handleLogin}>
+            Log in
+          </button>
+          <button className={styles.register_button} onClick={handleRegister}>
+            Register
+          </button>
         </div>
+        {/* </div> */}
       </form>
     </div>
   );

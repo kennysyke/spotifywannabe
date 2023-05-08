@@ -28,9 +28,13 @@ const playlists = [
 
 console.log(playlists);
 
-function SideBar() {
+function SideBar({ user }) {
   return (
-    <div className={`${styles.main__sidebar} sidebar`}>
+    <div
+      className={
+        user ? styles.main__sidebar : `${styles.main__sidebar} ${styles.hidden}`
+      }
+    >
       <SideBarPersonal />
       <SidebarPlaylist playlists={playlists} />
     </div>
