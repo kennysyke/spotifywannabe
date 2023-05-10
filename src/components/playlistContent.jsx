@@ -1,13 +1,18 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import Sprite from '../img/icon/sprite.svg';
 import PlaylistItem from './playlistItem';
-import { tracks } from '../mock/alltracks.js';
-// import { selections } from '../mock/selection';
+import { selections } from '../mock/selection';
 
 import styles from '../css/content.module.css';
 
-function Content() {
-  console.log(tracks);
+function PlaylistContent() {
+  const params = useParams();
+
+  const selectedPlaylist = selections.find(
+    (playlist) => playlist.id === Number(params.id)
+  );
+
   return (
     <div className={styles.centerblock__content}>
       <div className={styles.content__title}>
@@ -27,7 +32,7 @@ function Content() {
         </div>
       </div>
       <div className={styles.content__playlist}>
-        {tracks.map((track) => (
+        {selectedPlaylist.items.map((track) => (
           <PlaylistItem
             key={track.id}
             name={track.name}
@@ -42,4 +47,4 @@ function Content() {
   );
 }
 
-export default Content;
+export default PlaylistContent;

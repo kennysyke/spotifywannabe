@@ -2,9 +2,16 @@ import React, { useState, useEffect } from 'react';
 import 'react-loading-skeleton/dist/skeleton.css';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
+import { Link } from 'react-router-dom';
+import { selections } from '../mock/selection';
+
+import playlist1 from '../img/playlist01.png';
+import playlist2 from '../img/playlist02.png';
+import playlist3 from '../img/playlist03.png';
+
 import styles from '../css/sidebarPlaylist.module.css';
 
-const SidebarPlaylist = ({ playlists }) => {
+function SidebarPlaylist() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -35,15 +42,27 @@ const SidebarPlaylist = ({ playlists }) => {
         </SkeletonTheme>
       ) : (
         <div className={styles.sidebar__list}>
-          {playlists.map((playlist, index) => (
-            <div className={styles.sidebar__item} key={index}>
-              <a className={styles.sidebar__link} href={playlist.url}>
+          {selections.map((playlist) => (
+            <div className={styles.sidebar__item} key={playlist.id}>
+              <Link
+                className={styles.sidebar__link}
+                to={`/playlist/${playlist.id}`}
+                // onClick={() => handlePlaylistClick(playlist.id)}
+              >
                 <img
                   className={styles.sidebar__img}
-                  src={playlist.image}
-                  alt={playlist.alt}
+                  src={
+                    playlist.id === 1
+                      ? playlist1
+                      : playlist.id === 2
+                      ? playlist2
+                      : playlist.id === 3
+                      ? playlist3
+                      : playlist1
+                  }
+                  alt="Playlist Image"
                 />
-              </a>
+              </Link>
             </div>
           ))}
         </div>
