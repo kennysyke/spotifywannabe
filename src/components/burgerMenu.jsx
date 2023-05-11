@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import styles from '../css/burgerMenu.module.css';
 
-function BurgerMenu({ user }) {
+function BurgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleBurgerClick = () => {
@@ -31,7 +31,7 @@ function BurgerMenu({ user }) {
           </li>
           <li className={styles.menu__item}>
             <Link to="/login" className={styles.menu__link}>
-              {user ? 'Sign out' : 'Sign in'}
+              Выйти
             </Link>
           </li>
         </ul>
