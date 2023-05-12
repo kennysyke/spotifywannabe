@@ -41,7 +41,6 @@
     border-bottom: 1px solid #D0CECE;
 }
 .input::placeholder{
-    width: 61px;
     height: 24px;
     font-family: 'StratosSkyeng';
     font-style: normal;
