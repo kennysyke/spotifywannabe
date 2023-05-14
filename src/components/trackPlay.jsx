@@ -81,7 +81,7 @@ const TrackPlayAlbum = ({ album }) => {
 };
 
 const TrackPlay = ({ author, album, audioRef, updateProgress }) => {
-  const mp3File = '../../public/audio/song.mp3';
+  const mp3File = '/audio/song.mp3';
   return (
     <div className={`${styles.player__track_play} ${styles.track_play}`}>
       <div className={styles.track_play__contain}>
