@@ -1,0 +1,88 @@
+.form_box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -220px;
+    margin-left: -172px;
+}
+
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 365px;
+    height: 440px;
+    background: #FFFFFF;
+    border-radius: 12px;
+}
+
+.input_container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.logo__image {
+    width: 140px;
+    height: 21px;
+  }
+
+.input {
+    width: 278.5px;
+    height: 52px;
+    border:none;
+    border-bottom: 1px solid #D0CECE;
+}
+.input::placeholder{
+    height: 24px;
+    font-family: 'StratosSkyeng';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -0.003em;
+    font-feature-settings: 'pnum' on, 'lnum' on;
+    color: #E1E1E1;
+}
+
+.button_container {
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.login_button {
+    width: 278px;
+    height: 52px;
+    background: #580EA2;
+    border-radius: 6px;
+font-family: 'StratosSkyeng';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 24px;
+letter-spacing: -0.003em;
+font-feature-settings: 'pnum' on, 'lnum' on;
+color: #FFFFFF;
+}
+.register_button {
+    width: 278px;
+    height: 52px;
+    border: 1px solid #D0CECE;
+    border-radius: 6px;
+    font-family: 'StratosSkyeng';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 24px;
+letter-spacing: -0.003em;
+font-feature-settings: 'pnum' on, 'lnum' on;
+color: #000000;
+}

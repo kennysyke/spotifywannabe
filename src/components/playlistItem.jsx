@@ -50,29 +50,23 @@ function PlaylistItem(props) {
               </svg>
             </div>
             <div className={styles.track__title_text}>
-              <a className={styles.track__title_link} href={props.trackLink}>
-                <span className={styles.track__title_span}>
-                  {props.trackTitle}
-                </span>
+              <a className={styles.track__title_link} href={props.track_file}>
+                <span className={styles.track__title_span}>{props.name}</span>
               </a>
             </div>
           </div>
           <div className={styles.track__author}>
-            <a className={styles.track__author_link} href={props.authorLink}>
-              {props.authorName}
-            </a>
+            <span className={styles.track__author_link}>{props.author}</span>
           </div>
           <div className={styles.track__album}>
-            <a className={styles.track__album_link} href={props.albumLink}>
-              {props.albumName}
-            </a>
+            <span className={styles.track__album_link}>{props.album}</span>
           </div>
           <div className={styles.track__time}>
             <svg className={styles.track__time_svg} alt="time">
               <use xlinkHref={`${Sprite}#icon-like`}></use>
             </svg>
             <span className={styles.track__time_text}>
-              {props.trackDuration}
+              {props.duration_in_seconds}
             </span>
           </div>
         </div>

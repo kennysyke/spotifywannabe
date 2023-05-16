@@ -1,10 +1,13 @@
 import React from 'react';
 import Sprite from '../img/icon/sprite.svg';
 import PlaylistItem from './playlistItem';
+import { tracks } from '../mock/alltracks.js';
+// import { selections } from '../mock/selection';
 
 import styles from '../css/content.module.css';
 
 function Content() {
+  console.log(tracks);
   return (
     <div className={styles.centerblock__content}>
       <div className={styles.content__title}>
@@ -24,78 +27,16 @@ function Content() {
         </div>
       </div>
       <div className={styles.content__playlist}>
-        <PlaylistItem
-          trackTitle="My ertyujk Song"
-          trackLink="http://example.com/my-favorite-song"
-          authorName="The Best Artist"
-          authorLink="http://example.com/the-best-artist"
-          albumName="The Greatest Hits"
-          albumLink="http://example.com/the-greatest-hits"
-          trackDuration="3:30"
-        />
-        <PlaylistItem
-          trackTitle="My Favorite Song"
-          trackLink="http://example.com/my-favorite-song"
-          authorName="The Best Artist"
-          authorLink="http://example.com/the-best-artist"
-          albumName="The Greatest Hits"
-          albumLink="http://example.com/the-greatest-hits"
-          trackDuration="3:30"
-        />
-        <PlaylistItem
-          trackTitle="My Favorite Song"
-          trackLink="http://example.com/my-favorite-song"
-          authorName="The Best Artist"
-          authorLink="http://example.com/the-best-artist"
-          albumName="The Greatest Hits"
-          albumLink="http://example.com/the-greatest-hits"
-          trackDuration="3:30"
-        />
-        <PlaylistItem
-          trackTitle="My Favorite Song"
-          trackLink="http://example.com/my-favorite-song"
-          authorName="The Best Artist"
-          authorLink="http://example.com/the-best-artist"
-          albumName="The Greatest Hits"
-          albumLink="http://example.com/the-greatest-hits"
-          trackDuration="3:30"
-        />
-        <PlaylistItem
-          trackTitle="dfgh"
-          trackLink="http://example.com/my-favorite-song"
-          authorName="The Best Artist"
-          authorLink="http://example.com/the-best-artist"
-          albumName="The Greatest Hits"
-          albumLink="http://example.com/the-greatest-hits"
-          trackDuration="3:30"
-        />
-        <PlaylistItem
-          trackTitle="dfghj"
-          trackLink="http://example.com/my-favorite-song"
-          authorName="The Best Artist"
-          authorLink="http://example.com/the-best-artist"
-          albumName="The Greatest Hits"
-          albumLink="http://example.com/the-greatest-hits"
-          trackDuration="3:30"
-        />
-        <PlaylistItem
-          trackTitle="sdfgh"
-          trackLink="http://example.com/my-favorite-song"
-          authorName="The Best Artist"
-          authorLink="http://example.com/the-best-artist"
-          albumName="The Greatest Hits"
-          albumLink="http://example.com/the-greatest-hits"
-          trackDuration="3:30"
-        />
-        <PlaylistItem
-          trackTitle="sdfgh"
-          trackLink="http://example.com/my-favorite-song"
-          authorName="The Best Artist"
-          authorLink="http://example.com/the-best-artist"
-          albumName="The Greatest Hits"
-          albumLink="http://example.com/the-greatest-hits"
-          trackDuration="3:30"
-        />
+        {tracks.map((track) => (
+          <PlaylistItem
+            key={track.id}
+            name={track.name}
+            track_file={track.track_file}
+            author={track.author}
+            album={track.album}
+            duration_in_seconds={track.duration_in_seconds}
+          />
+        ))}
       </div>
     </div>
   );

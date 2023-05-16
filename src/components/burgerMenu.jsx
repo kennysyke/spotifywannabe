@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import styles from '../css/burgerMenu.module.css';
 
@@ -6,7 +7,7 @@ function BurgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleBurgerClick = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((prev) => !prev);
   };
 
   return (
@@ -16,22 +17,22 @@ function BurgerMenu() {
         <span className={styles.burger__line}></span>
         <span className={styles.burger__line}></span>
       </div>
-      <div className={`${styles.nav__menu} menu ${isOpen ? 'open' : ''}`}>
+      <div className={`${styles.nav__menu} menu ${isOpen ? '' : styles.open}`}>
         <ul className={styles.menu__list}>
           <li className={styles.menu__item}>
-            <a href="http://" className={styles.menu__link}>
-              Главное
-            </a>
+            <Link to="/" className={styles.menu__link}>
+              Главная
+            </Link>
           </li>
           <li className={styles.menu__item}>
-            <a href="http://" className={styles.menu__link}>
+            <Link to="/" className={styles.menu__link}>
               Мой плейлист
-            </a>
+            </Link>
           </li>
           <li className={styles.menu__item}>
-            <a href="http://" className={styles.menu__link}>
-              Войти
-            </a>
+            <Link to="/login" className={styles.menu__link}>
+              Выйти
+            </Link>
           </li>
         </ul>
       </div>

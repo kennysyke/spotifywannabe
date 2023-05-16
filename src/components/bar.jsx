@@ -1,18 +1,50 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import TrackPlay from './trackPlay';
 import Sprite from '../img/icon/sprite.svg';
 
 import styles from '../css/bar.module.css';
 
 function Bar() {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const audioRef = useRef(null);
+
+  const togglePlay = () => {
+    const audio = audioRef.current;
+
+    if (isPlaying) {
+      audio.pause();
+    } else {
+      audio.play();
+    }
+
+    setIsPlaying(!isPlaying);
+  };
+
+  const updateProgress = () => {
+    const audio = audioRef.current;
+    const progressPercentage = (audio.currentTime / audio.duration) * 100;
+    setProgress(progressPercentage);
+  };
+
   return (
+    // <>
+    //   <audio controls ref={audioRef}>
+    //     <source src="../../public/audio/song.mp3" type="audio/mpeg" />
+    //   </audio>
+
     <div className={styles.bar}>
       <div className={styles.bar__content}>
-        <PlayerProgress />
+        <PlayerProgress progress={progress} />
         <div className={styles.bar__player_block}>
           <div className={`${styles.bar__player} player`}>
-            <PlayerControls />
-            <TrackPlay author="Linkin Park" album="Meteora" />
+            <PlayerControls isPlaying={isPlaying} togglePlay={togglePlay} />
+            <TrackPlay
+              author="Linkin Park"
+              album="Meteora"
+              audioRef={audioRef}
+              updateProgress={updateProgress}
+            />
           </div>
           <Volume />
         </div>
@@ -21,15 +53,20 @@ function Bar() {
   );
 }
 
-function PlayerProgress() {
-  return <div className={styles.bar__player_progress}></div>;
+function PlayerProgress({ progress }) {
+  return (
+    <div
+      className={styles.bar__player_progress}
+      style={{ width: `${progress}%` }}
+    ></div>
+  );
 }
 
-function PlayerControls() {
+function PlayerControls({ isPlaying, togglePlay }) {
   return (
     <div className={styles.player__controls}>
       <PlayerBtnPrev />
-      <PlayerBtnPlay />
+      <PlayerBtnPlay isPlaying={isPlaying} togglePlay={togglePlay} />
       <PlayerBtnNext />
       <PlayerBtnRepeat />
       <PlayerBtnShuffle />
@@ -47,11 +84,14 @@ function PlayerBtnPrev() {
   );
 }
 
-function PlayerBtnPlay() {
+function PlayerBtnPlay({ isPlaying, togglePlay }) {
   return (
-    <div className={`${styles.player__btn_play} ${styles._btn}`}>
+    <div
+      className={`${styles.player__btn_play} ${styles._btn}`}
+      onClick={togglePlay}
+    >
       <svg className={styles.player__btn_play_svg} alt="play">
-        <use xlinkHref={`${Sprite}#icon-play`}></use>
+        <use xlinkHref={`${Sprite}#icon-${isPlaying ? 'pause' : 'play'}`}></use>
       </svg>
     </div>
   );

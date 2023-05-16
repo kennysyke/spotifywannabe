@@ -17,3 +17,7 @@
     height: 17px;
     color: #181818;
   }
+
+  .hidden {
+    display: none;
+  }

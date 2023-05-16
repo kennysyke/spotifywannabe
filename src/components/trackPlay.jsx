@@ -80,13 +80,15 @@ const TrackPlayAlbum = ({ album }) => {
   );
 };
 
-const TrackPlay = ({ author, album }) => {
+const TrackPlay = ({ author, album, audioRef, updateProgress }) => {
+  const mp3File = '/audio/song.mp3';
   return (
     <div className={`${styles.player__track_play} ${styles.track_play}`}>
       <div className={styles.track_play__contain}>
         <TrackPlayImage />
         <TrackPlayAuthor author={author} />
         <TrackPlayAlbum album={album} />
+        <audio ref={audioRef} src={mp3File} onTimeUpdate={updateProgress} />
       </div>
 
       <div className={styles.track_play__like_dis}>
