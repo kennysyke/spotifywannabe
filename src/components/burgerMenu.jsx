@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ThemeSwitcher } from '../dynamic/theme-switcher';
-import { ThemeContext, themes } from '../dynamic/contexts/theme';
 
 import styles from '../css/burgerMenu.module.css';
 
@@ -11,20 +10,9 @@ function BurgerMenu() {
   const handleBurgerClick = () => {
     setIsOpen((prev) => !prev);
   };
-  const [currentTheme, setCurrentTheme] = useState(themes.light);
-
-  const toggleTheme = () => {
-    if (currentTheme === themes.dark) {
-      setCurrentTheme(themes.light);
-      return;
-    }
-    setCurrentTheme(themes.dark);
-  };
-  // const { theme, toggleTheme } = useContext(ThemeContext);
-  // const isDarkTheme = theme === themes.dark;
 
   return (
-    <ThemeContext.Provider value={{ theme: currentTheme, toggleTheme }}>
+    <>
       <div className={styles.nav__burger} onClick={handleBurgerClick}>
         <span className={styles.burger__line}></span>
         <span className={styles.burger__line}></span>
@@ -52,7 +40,7 @@ function BurgerMenu() {
           </li>
         </ul>
       </div>
-    </ThemeContext.Provider>
+    </>
   );
 }
 
