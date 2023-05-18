@@ -14,7 +14,6 @@ function Header({ user }) {
       className={
         user ? styles.main__nav : `${styles.main__nav} ${styles.hidden}`
       }
-      style={{ backgroundColor: theme.navcolor, color: theme.color }}
     >
       <div className={styles.nav__logo}>
         <img

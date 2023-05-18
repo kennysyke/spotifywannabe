@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-import { ThemeContext } from '../dynamic/contexts/theme';
+
 import styles from '../css/sidebarPersonal.module.css';
 
 function SideBarPersonal() {
   const [isLoading, setIsLoading] = useState(true);
-  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -25,16 +24,8 @@ function SideBarPersonal() {
         </div>
       ) : (
         <div>
-          <p
-            className={styles.sidebar__personal_name}
-            style={{ color: theme.color }}
-          >
-            Sergey.Ivanov
-          </p>
-          <div
-            className={styles.sidebar__avatar}
-            style={{ backgroundColor: theme.navcolor }}
-          ></div>
+          <p className={styles.sidebar__personal_name}>Sergey.Ivanov</p>
+          <div className={styles.sidebar__avatar}></div>
         </div>
       )}
     </div>

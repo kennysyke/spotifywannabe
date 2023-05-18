@@ -6,7 +6,7 @@ import styles from '../css/search.module.css';
 function Search() {
   const { theme } = useContext(ThemeContext);
   return (
-    <div className={styles.centerblock__search} style={{ color: theme.color }}>
+    <div className={styles.centerblock__search}>
       <svg className={styles.search__svg}>
         <use
           xlinkHref={`${Sprite}#icon-${
@@ -19,7 +19,6 @@ function Search() {
         type="search"
         placeholder="Поиск"
         name="search"
-        style={{ color: theme.color }}
       />
     </div>
   );

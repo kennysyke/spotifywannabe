@@ -1,0 +1,32 @@
+[data-theme='light'] {
+  --nav-background: #F6F5F3;
+  --page-background: white;
+  --a-color: black;
+  --bar-background: white;
+  --play-background: #F6F4F4;
+  --dropdown-background: #F6F5F3;
+  --dropdown-border:#F6F5F3;
+  --scroll-background: white;
+  --burger-line: #383838;
+  --border-bottom: #ff299f;
+  --filter-button-border: 1px solid black;
+  --volume-background:#797979;
+  --volume-progress:#AD61FF;
+  --volume-slider:#FFF;
+}
+
+[data-theme='dark'] {
+  --nav-background: #383838;
+  --page-background: #1C1C1C;
+  --a-color: #ffffff;
+  --bar-background: #2e2e2e;
+  --play-background: #313131;
+  --dropdown-background: #313131;
+  --dropdown-border:#313131;
+  --scroll-background: #4b4949;
+  --burger-line: #D3D3D3;
+  --filter-button-border: 1px solid #FFFFFF;
+  --volume-background:#797979;
+  --volume-progress:#FFFFFF;
+  --volume-slider:#1A1A1A;
+  }

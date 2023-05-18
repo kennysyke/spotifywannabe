@@ -1,3 +1,4 @@
+
 .dropdown_content ul {
   display: flex;
   flex-direction: column;
@@ -8,19 +9,19 @@
   width: 248px;
   max-height: 200px;
   overflow-y: scroll;
-  background: #313131;
+  background: var(--dropdown-background);
   box-sizing: border-box;
-  border: 10px solid #313131;
+  border: 10px solid var(--dropdown-border);
 }
 
 .dropdown_content ul::-webkit-scrollbar {
   width: 4px;
 } 
 .dropdown_content ul::-webkit-scrollbar-track {
-  background:#4B4949;
+  background:var(--scroll-background);
 } 
 .dropdown_content ul::-webkit-scrollbar-thumb {
-  background: white; 
+  background: var(--a-color); 
 } 
 
 ul li:hover {
@@ -37,7 +38,7 @@ ul li:hover {
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  border: 1px solid #FFFFFF;
+  border: var(--filter-button-border);
   border-radius: 60px;
   padding: 6px 20px;
   margin-bottom: 10px;

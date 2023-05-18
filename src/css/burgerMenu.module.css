@@ -27,7 +27,7 @@
     display: inline-block;
     width: 100%;
     height: 1px;
-    background-color: #D3D3D3;
+    background-color: var(--burger-line);
   }
   
   .menu__list {
@@ -40,7 +40,7 @@
   }
   
   .menu__link {
-    color: #FFFFFF;
+    color: var(--a-color);
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;

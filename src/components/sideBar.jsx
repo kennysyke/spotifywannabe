@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import SideBarPersonal from './sidebarPersonal';
 import SidebarPlaylist from './sidebarPlaylist';
-import { ThemeContext } from '../dynamic/contexts/theme';
+
 // import { selections } from '../mock/selection';
 
 // import playlist1 from '../img/playlist01.png';
@@ -31,13 +31,11 @@ import styles from '../css/sideBar.module.css';
 // console.log(playlists);
 
 function SideBar({ user }) {
-  const { theme } = useContext(ThemeContext);
   return (
     <div
       className={
         user ? styles.main__sidebar : `${styles.main__sidebar} ${styles.hidden}`
       }
-      style={{ backgroundColor: theme.background, color: theme.color }}
     >
       <SideBarPersonal />
       <SidebarPlaylist />

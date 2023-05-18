@@ -38,7 +38,7 @@ button,
     bottom: 0;
     left: 0;
     width: 100%;
-    background: rgba(28, 28, 28, 0.5);
+    background: var(--bar-background);
   }
   
   .bar__content {
@@ -237,7 +237,7 @@ input[type=range].volume__progress_line::-webkit-slider-thumb {
   width: 12px;
   height: 12px;
   border-radius: 1em;
-  background: #1A1A1A;
+  background: var(--a-color);
   border: 2px solid #FFF;
   box-shadow: 0 0 2px black;
   margin-top: calc(2px * 0.5 - max(12px * 0.5,2px));
@@ -247,34 +247,10 @@ input[type=range].volume__progress_line::-webkit-slider-runnable-track {
   height: 2px;
   border: none;
   border-radius: 0.5em;
-  background: #797979;
+  background: var(--volume-background);
   box-shadow: none;
 }
 
 input[type=range].volume__progress_line.slider_progress::-webkit-slider-runnable-track {
-  background: linear-gradient(#FFFFFF,#FFFFFF) 0/var(--sx) 100% no-repeat, #797979;
+  background: var(--volume-progress) 0/var(--sx) 100% no-repeat, var(--volume-background);
 }
-
-/* webkit
-input[type=range].volume__progress_line::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 12px;
-  height: 12px;
-  border-radius: 1em;
-  background: #FFF;
-  border: 2px solid #FFF;
-  box-shadow: 0 0 2px black;
-  margin-top: calc(2px * 0.5 - max(12px * 0.5,2px));
-}
-
-input[type=range].volume__progress_line::-webkit-slider-runnable-track {
-  height: 2px;
-  border: none;
-  border-radius: 0.5em;
-  background: #FFF;
-  box-shadow: none;
-}
-
-input[type=range].volume__progress_line.slider-progress::-webkit-slider-runnable-track {
-  background: linear-gradient(#AD61FF,#AD61FF) 0/var(--sx) 100% no-repeat, #FFF;
-} */
