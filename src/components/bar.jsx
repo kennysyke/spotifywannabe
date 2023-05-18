@@ -1,13 +1,15 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import TrackPlay from './trackPlay';
 import Sprite from '../img/icon/sprite.svg';
-
+import { ThemeContext, themes } from '../dynamic/contexts/theme';
 import styles from '../css/bar.module.css';
 
 function Bar() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const audioRef = useRef(null);
+
+  const { theme } = useContext(ThemeContext);
 
   const togglePlay = () => {
     const audio = audioRef.current;
@@ -33,7 +35,10 @@ function Bar() {
     //     <source src="../../public/audio/song.mp3" type="audio/mpeg" />
     //   </audio>
 
-    <div className={styles.bar}>
+    <div
+      className={styles.bar}
+      style={{ backgroundColor: theme.background, color: theme.color }}
+    >
       <div className={styles.bar__content}>
         <PlayerProgress progress={progress} />
         <div className={styles.bar__player_block}>
@@ -128,19 +133,38 @@ function PlayerBtnShuffle() {
 }
 
 function Volume() {
+  // const [volume, setVolume] = useState(1);
+  // const [muted, setMuted] = useState(false);
+  const { theme } = useContext(ThemeContext);
   return (
     <div className={`${styles.bar__volume_block} volume`}>
       <div className={styles.volume__content}>
         <div className={styles.volume__image}>
-          <svg className={styles.volume__svg} alt="volume">
-            <use xlinkHref={`${Sprite}#icon-volume`} />
+          <svg
+            className={styles.volume__svg}
+            // onClick={() => setMuted((m) => !m)}
+            alt="volume"
+          >
+            <use
+              xlinkHref={`${Sprite}#icon-${
+                theme === themes.dark ? 'volume' : 'volume-light'
+              }`}
+            />
           </svg>
         </div>
         <div className={`${styles.volume__progress} ${styles._btn}`}>
           <input
-            className={`${styles.volume__progress_line} ${styles._btn}`}
+            className={`${styles.volume__progress_line} ${styles.slider_progress} ${styles._btn}`}
+            style={{
+              backgroundColor: theme.volumeback,
+              color: theme.volumecolor,
+            }}
             type="range"
             name="range"
+            // value={volume}
+            // onChange={(event) => {
+            //   setVolume(event.target.valueAsNumber);
+            // }}
           />
         </div>
       </div>

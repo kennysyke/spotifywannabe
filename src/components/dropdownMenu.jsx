@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useState, useEffect, useContext } from 'react';
+import { ThemeContext } from '../dynamic/contexts/theme';
 import styles from '../css/dropdownMenu.module.css';
 import stylesBtn from '../css/btn.module.css';
 
 function DropdownMenu({ label, items, open, onOpen }) {
+  const { theme } = useContext(ThemeContext);
   const [showMenu, setShowMenu] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -26,6 +27,7 @@ function DropdownMenu({ label, items, open, onOpen }) {
           open ? styles.active : ''
         }`}
         onClick={handleButtonClick}
+        style={{ borderСolor: theme.color }}
       >
         {label}
       </div>

@@ -17,7 +17,6 @@ import {
 function APP() {
   const [user, setUser] = useState(null);
   const [currentTheme, setCurrentTheme] = useState(themes.dark);
-  const theme = useThemeContext;
 
   const toggleTheme = () => {
     setCurrentTheme((prevTheme) =>
@@ -26,12 +25,13 @@ function APP() {
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme: currentTheme, toggleTheme }}>
       <div
         className={styles.wrapper}
         style={{
-          backgroundColor: theme.background,
-          color: theme.color,
+          backgroundColor: currentTheme.background,
+          color: currentTheme.color,
+          borderColor: currentTheme.color,
         }}
       >
         <div className={styles.container}>

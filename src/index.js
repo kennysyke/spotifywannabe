@@ -11,3 +11,6 @@ root.render(
     <APP />
   </Router>
 );
+
+
+<script src="range-input.js"></script>;

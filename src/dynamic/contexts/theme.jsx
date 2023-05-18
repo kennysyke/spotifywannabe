@@ -3,11 +3,20 @@ import React, { useContext } from 'react';
 export const themes = {
   light: {
     color: 'black',
-    background: '#F5F5F5',
+    background: 'white',
+    textcolor: '#000',
+    navcolor: '#F6F5F3',
+    albumtextcolor: '#B1B1B',
+    volumeback: '#797979',
+    volumecolor: '#AD61FF',
   },
   dark: {
     color: '#FFFFFF',
     background: 'black',
+    navcolor: '#1C1C1C',
+    textcolor: '#FFFFFF',
+    volumeback: '#797979',
+    volumecolor: '#FFF',
   },
 };
 

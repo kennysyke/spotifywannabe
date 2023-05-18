@@ -1,23 +1,23 @@
-import { useThemeContext } from '../contexts/theme';
+import { useContext } from 'react';
 import React from 'react';
 import Sprite from '../../img/icon/sprite.svg';
 
-import { themes } from '../contexts/theme';
+import { ThemeContext, themes } from '../contexts/theme';
 
 import styles from '../../css/burgerMenu.module.css';
 
 export const ThemeSwitcher = () => {
-  const { toggleTheme } = useThemeContext();
-
-  console.log('first');
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <button className={styles.menu__button} onClick={toggleTheme}>
+    <div className={styles.menu__button} onClick={toggleTheme}>
       <svg className={styles.player__btn_play_svg} alt="play">
         <use
-          xlinkHref={`${Sprite}#icon-${themes.dark ? 'dark' : 'light'}`}
+          xlinkHref={`${Sprite}#icon-${
+            theme === themes.dark ? 'dark' : 'light'
+          }`}
         ></use>
       </svg>
-    </button>
+    </div>
   );
 };
