@@ -1,6 +1,7 @@
+
 .main__nav {
     width: 244px;
-    background-color: #181818;
+    background-color: var( --nav-background);
     padding: 20px 0 20px 36px;
   }
 

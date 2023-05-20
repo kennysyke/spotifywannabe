@@ -1,3 +1,4 @@
+
 .playlist__item {
     width: 100%;
     display: block;
@@ -39,7 +40,7 @@
     width: 51px;
     height: 51px;
     padding: 16px;
-    background: #313131;
+    background: var(--play-background);
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -65,7 +66,7 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
-    color: #FFFFFF;
+    color: var(--a-color);
   }
   
   .track__title_span {
@@ -91,7 +92,7 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
-    color: #FFFFFF;
+    color: var(--a-color);
     text-align: left;
   }
 

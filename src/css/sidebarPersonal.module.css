@@ -1,3 +1,4 @@
+
 .sidebar__personal {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -20,13 +21,13 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
-    color: #FFFFFF;
+    color: var(--a-color);
     margin-right: 16px;
   }
   
   .sidebar__avatar {
     width: 43px;
     height: 43px;
-    background-color: #313131;
+    background-color: var(--play-background);
     border-radius: 50%;
   }

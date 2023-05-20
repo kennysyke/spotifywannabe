@@ -23,7 +23,7 @@
   .track_play__image {
     width: 51px;
     height: 51px;
-    background-color: #313131;
+    background-color: var(--play-background);
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -59,7 +59,7 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
-    color: #FFFFFF;
+    color: var(--a-color);
     white-space: nowrap;
   }
   
@@ -75,7 +75,7 @@
     font-weight: 400;
     font-size: 13px;
     line-height: 24px;
-    color: #FFFFFF;
+    color: var(--a-color);
   }
   
   .track_play__like_dis {

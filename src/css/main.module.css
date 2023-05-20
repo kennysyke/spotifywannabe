@@ -1,8 +1,9 @@
+
 .wrapper {
     width: 100%;
     min-height: 100%;
     overflow: hidden;
-    background-color: #383838;
+    background-color: var(--page-background);
   }
   
   .container {
@@ -10,7 +11,7 @@
     height: 100vh;
     margin: 0 auto;
     position: relative;
-    background-color: #181818;
+    background-color: var(--page-background);
   }
 
 .main {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ThemeSwitcher } from '../dynamic/theme-switcher';
 
 import styles from '../css/burgerMenu.module.css';
 
@@ -33,6 +34,9 @@ function BurgerMenu() {
             <Link to="/login" className={styles.menu__link}>
               Выйти
             </Link>
+          </li>
+          <li className={styles.menu__item}>
+            <ThemeSwitcher />
           </li>
         </ul>
       </div>

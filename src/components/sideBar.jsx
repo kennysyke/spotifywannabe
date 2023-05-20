@@ -1,6 +1,7 @@
 import React from 'react';
 import SideBarPersonal from './sidebarPersonal';
 import SidebarPlaylist from './sidebarPlaylist';
+
 // import { selections } from '../mock/selection';
 
 // import playlist1 from '../img/playlist01.png';

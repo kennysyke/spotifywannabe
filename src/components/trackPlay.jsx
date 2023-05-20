@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Sprite from '../img/icon/sprite.svg';
-
+import { ThemeContext } from '../dynamic/contexts/theme';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
@@ -8,6 +8,7 @@ import styles from '../css/trackPlay.module.css';
 
 const TrackPlayImage = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -18,7 +19,10 @@ const TrackPlayImage = () => {
   }, []);
 
   return (
-    <div className={styles.track_play__image}>
+    <div
+      className={styles.track_play__image}
+      style={{ background: theme.navcolor }}
+    >
       {isLoading ? (
         <svg className={styles.track_play__svg} alt="music">
           <Skeleton width={18} height={17} />
@@ -34,6 +38,7 @@ const TrackPlayImage = () => {
 
 const TrackPlayAuthor = ({ author }) => {
   const [isLoading, setIsLoading] = useState(true);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -48,7 +53,11 @@ const TrackPlayAuthor = ({ author }) => {
       {isLoading ? (
         <Skeleton width={49} />
       ) : (
-        <a className={styles.track_play__author_link} href="http://">
+        <a
+          className={styles.track_play__author_link}
+          style={{ color: theme.color }}
+          href="http://"
+        >
           {author}
         </a>
       )}
@@ -58,7 +67,7 @@ const TrackPlayAuthor = ({ author }) => {
 
 const TrackPlayAlbum = ({ album }) => {
   const [isLoading, setIsLoading] = useState(true);
-
+  const { theme } = useContext(ThemeContext);
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -72,7 +81,11 @@ const TrackPlayAlbum = ({ album }) => {
       {isLoading ? (
         <Skeleton width={49} />
       ) : (
-        <a className={styles.track_play__album_link} href="http://">
+        <a
+          className={styles.track_play__album_link}
+          style={{ color: theme.color }}
+          href="http://"
+        >
           {album}
         </a>
       )}

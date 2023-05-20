@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import Sprite from '../img/icon/sprite.svg';
+import { ThemeContext } from '../dynamic/contexts/theme';
 
 import styles from '../css/playlistItem.module.css';
+import s from '../css/trackPlay.module.css';
 
 function PlaylistItem(props) {
   const [isLoading, setIsLoading] = useState(true);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -44,19 +47,36 @@ function PlaylistItem(props) {
       ) : (
         <div className={`${styles.playlist__track} track`}>
           <div className={styles.track__title}>
-            <div className={styles.track__title_image}>
-              <svg className={styles.track__time_svg} alt="music">
+            <div
+              className={styles.track__title_image}
+              style={{ background: theme.navcolor }}
+            >
+              <svg className={s.track_play__svg} alt="music">
                 <use xlinkHref={`${Sprite}#icon-note`}></use>
               </svg>
             </div>
             <div className={styles.track__title_text}>
               <a className={styles.track__title_link} href={props.track_file}>
-                <span className={styles.track__title_span}>{props.name}</span>
+                <span
+                  className={styles.track__title_span}
+                  style={{
+                    color: theme.color,
+                  }}
+                >
+                  {props.name}
+                </span>
               </a>
             </div>
           </div>
           <div className={styles.track__author}>
-            <span className={styles.track__author_link}>{props.author}</span>
+            <span
+              className={styles.track__author_link}
+              style={{
+                color: theme.color,
+              }}
+            >
+              {props.author}
+            </span>
           </div>
           <div className={styles.track__album}>
             <span className={styles.track__album_link}>{props.album}</span>
