@@ -1,6 +1,9 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
+import { useMutation } from 'react-query';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSignupMutation, useGetTokenMutation } from '../../services/api';
 import styles from '../../css/login.module.css';
 import logoBlack from '../../img/logo_black.png';
 
@@ -9,7 +12,8 @@ function RegistrationForm() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
-
+  const [signup] = useSignupMutation();
+  const [token, setToken] = useState('');
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
   };
@@ -22,20 +26,29 @@ function RegistrationForm() {
     setConfirmPassword(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const tokenMutation = useMutation(useGetTokenMutation, {
+    onSuccess: (data) => {
+      const token = data.token;
+      setToken(token);
+
+      navigate('/');
+    },
+    onError: (error) => {
+      console.log('Error registering:', error);
+    },
+  });
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (password === confirmPassword) {
-      // Handle registration logic here
-      console.log(
-        'Registering with username: ',
-        username,
-        ' and password: ',
-        password
-      );
-
-      // Redirect to the dashboard
-      navigate('/');
+      signup({ username, password });
+      try {
+        tokenMutation.mutate({ username, password });
+        navigate('/');
+      } catch (error) {
+        console.log('Error registering:', error);
+      }
     } else {
       console.log('Passwords do not match');
     }

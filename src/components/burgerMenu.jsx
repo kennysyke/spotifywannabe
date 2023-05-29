@@ -26,7 +26,7 @@ function BurgerMenu() {
             </Link>
           </li>
           <li className={styles.menu__item}>
-            <Link to="/" className={styles.menu__link}>
+            <Link to="/favourite" className={styles.menu__link}>
               Мой плейлист
             </Link>
           </li>

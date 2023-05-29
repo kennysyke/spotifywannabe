@@ -12,6 +12,7 @@ export const AppRoutes = ({ user, setUser }) => {
       <Route path="/login" element={<LoginForm setUser={setUser} />} />
       <Route path="/register" element={<RegistrationForm />} />
       <Route path="/playlist/:id" element={<Center />} />
+      <Route path="/favourite" element={<Center />} />
 
       <Route element={<ProtectedRoute isAllowed={Boolean(user)} />}>
         <Route path="/" element={<Center />} />

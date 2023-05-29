@@ -1,13 +1,23 @@
 import React from 'react';
 import Sprite from '../img/icon/sprite.svg';
 import PlaylistItem from './playlistItem';
-import { tracks } from '../mock/alltracks.js';
-// import { selections } from '../mock/selection';
+import { useGetAllTracksQuery } from '../services/api';
 
 import styles from '../css/content.module.css';
 
 function Content() {
-  console.log(tracks);
+  const { data: tracks, isLoading, isFetching } = useGetAllTracksQuery();
+
+  if (isLoading || isFetching) {
+    return <div className={styles.centerblock__content}>Loading...</div>;
+  }
+
+  if (!tracks) {
+    return (
+      <div className={styles.centerblock__content}>Error fetching tracks.</div>
+    );
+  }
+
   return (
     <div className={styles.centerblock__content}>
       <div className={styles.content__title}>

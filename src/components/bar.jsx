@@ -29,6 +29,20 @@ function Bar() {
     setProgress(progressPercentage);
   };
 
+  const handleProgressClick = (event) => {
+    const progressBar = event.target;
+    const boundingRect = progressBar.getBoundingClientRect();
+    const clickedX = event.clientX - boundingRect.left;
+    const progressBarWidth = boundingRect.width;
+    const clickedPercentage = (clickedX / progressBarWidth) * 100;
+
+    const audio = audioRef.current;
+    const newTime = (audio.duration / 100) * clickedPercentage;
+    audio.currentTime = newTime;
+
+    setProgress(clickedPercentage);
+  };
+
   return (
     // <>
     //   <audio controls ref={audioRef}>
@@ -40,7 +54,7 @@ function Bar() {
       style={{ backgroundColor: theme.background, color: theme.color }}
     >
       <div className={styles.bar__content}>
-        <PlayerProgress progress={progress} />
+        <PlayerProgress progress={progress} onClick={handleProgressClick} />
         <div className={styles.bar__player_block}>
           <div className={`${styles.bar__player} player`}>
             <PlayerControls isPlaying={isPlaying} togglePlay={togglePlay} />

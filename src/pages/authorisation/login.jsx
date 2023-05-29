@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLoginMutation, useGetTokenMutation } from '../../services/api';
 import styles from '../../css/login.module.css';
 import logoBlack from '../../img/logo_black.png';
 // import { AppRoutes } from '../../routes';
@@ -9,6 +11,7 @@ function LoginForm({ setUser }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const [login, { isLoading }] = useLoginMutation();
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -18,10 +21,16 @@ function LoginForm({ setUser }) {
     setPassword(event.target.value);
   };
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
-    setUser({ login: username });
-    navigate('/');
+    try {
+      const credentials = { username, password };
+      const response = await login(credentials).unwrap();
+      setUser({ login: response.username });
+      navigate('/');
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
   };
 
   const handleRegister = (event) => {

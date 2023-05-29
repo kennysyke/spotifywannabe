@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 import React, { useState, useEffect, useContext } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -7,9 +9,20 @@ import { ThemeContext } from '../dynamic/contexts/theme';
 import styles from '../css/playlistItem.module.css';
 import s from '../css/trackPlay.module.css';
 
-function PlaylistItem(props) {
+function PlaylistItem(
+  id,
+  name,
+  track_file,
+  author,
+  album,
+  duration_in_seconds,
+  isFavorite
+) {
   const [isLoading, setIsLoading] = useState(true);
   const { theme } = useContext(ThemeContext);
+  const handleFavorite = () => {
+    handleFavorite(id);
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -56,14 +69,14 @@ function PlaylistItem(props) {
               </svg>
             </div>
             <div className={styles.track__title_text}>
-              <a className={styles.track__title_link} href={props.track_file}>
+              <a className={styles.track__title_link} href={track_file}>
                 <span
                   className={styles.track__title_span}
                   style={{
                     color: theme.color,
                   }}
                 >
-                  {props.name}
+                  {name}
                 </span>
               </a>
             </div>
@@ -75,18 +88,21 @@ function PlaylistItem(props) {
                 color: theme.color,
               }}
             >
-              {props.author}
+              {author}
             </span>
           </div>
           <div className={styles.track__album}>
-            <span className={styles.track__album_link}>{props.album}</span>
+            <span className={styles.track__album_link}>{album}</span>
           </div>
-          <div className={styles.track__time}>
+          <div className={styles.track__time} onClick={handleFavorite}>
             <svg className={styles.track__time_svg} alt="time">
-              <use xlinkHref={`${Sprite}#icon-like`}></use>
+              <use
+                xlinkHref={`${Sprite}#icon-like`}
+                fill={isFavorite ? 'red' : 'gray'}
+              ></use>
             </svg>
             <span className={styles.track__time_text}>
-              {props.duration_in_seconds}
+              {duration_in_seconds}
             </span>
           </div>
         </div>
