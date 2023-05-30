@@ -5,11 +5,13 @@ import { useDispatch } from 'react-redux';
 import styles from '../../css/login.module.css';
 import logoBlack from '../../img/logo_black.png';
 import { userLogin } from '../../store/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 function RegistrationForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
@@ -30,13 +32,14 @@ function RegistrationForm() {
     event.preventDefault();
 
     if (password === confirmPassword) {
-      const response = await fetch('/api/register', {
+      const response = await fetch('https://painassasin.online/user/signup/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
       const { token } = await response.json();
       dispatch(userLogin(token));
+      navigate('/');
     } else {
       console.log('Passwords do not match');
     }
