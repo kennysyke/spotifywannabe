@@ -5,19 +5,25 @@ import { useDispatch } from 'react-redux';
 import styles from '../../css/login.module.css';
 import logoBlack from '../../img/logo_black.png';
 import { userLogin } from '../../store/authSlice';
+import { useSignupMutation } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 
 function RegistrationForm() {
+  const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
 
+  const signupMutation = useSignupMutation();
   const dispatch = useDispatch();
-  const [email, setEmail] = useState('');
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
+  };
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
@@ -32,14 +38,18 @@ function RegistrationForm() {
     event.preventDefault();
 
     if (password === confirmPassword) {
-      const response = await fetch('https://painassasin.online/user/signup/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
-      const { token } = await response.json();
-      dispatch(userLogin(token));
-      navigate('/');
+      try {
+        const { data } = await signupMutation.mutateAsync({
+          email,
+          password,
+          username,
+        }); // Use the signup mutation from api.js
+        const { token, username, email } = data; // Extract the token, username, and email from the response
+        dispatch(userLogin({ token, username, email })); // Dispatch the userLogin action with the token, username, and email
+        navigate('/'); // Navigate to the desired page
+      } catch (error) {
+        console.error('Registration failed:', error);
+      }
     } else {
       console.log('Passwords do not match');
     }
@@ -57,6 +67,15 @@ function RegistrationForm() {
             placeholder="username"
             value={username}
             onChange={handleUsernameChange}
+          />
+
+          <input
+            className={styles.input}
+            type="email"
+            id="email"
+            placeholder="email"
+            value={email}
+            onChange={handleEmailChange}
           />
 
           <input

@@ -12,13 +12,13 @@ import { userLogin } from '../../store/authSlice';
 
 function LoginForm() {
   const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const loginMutation = useLoginMutation();
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
@@ -28,15 +28,10 @@ function LoginForm() {
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('https://painassasin.online/user/login/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
-      const { token } = await response.json();
-      // Save the token in the store
-      dispatch(userLogin(token));
-      navigate('/');
+      const { data } = await loginMutation.mutateAsync({ email, password }); // Use the login mutation from api.js
+      const { token, username, email } = data; // Extract the token, username, and email from the response
+      dispatch(userLogin({ token, username, email })); // Dispatch the userLogin action with the token, username, and email
+      navigate('/'); // Navigate to the desired page
     } catch (error) {
       console.error('Login failed:', error);
     }
@@ -55,11 +50,11 @@ function LoginForm() {
         <div className={styles.input_container}>
           <input
             className={styles.input}
-            type="text"
-            id="username"
-            placeholder="login"
-            value={username}
-            onChange={handleUsernameChange}
+            type="email"
+            id="email"
+            placeholder="email"
+            value={email}
+            onChange={handleEmailChange}
           />
           <input
             className={styles.input}

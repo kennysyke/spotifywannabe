@@ -7,17 +7,19 @@ export const api = createApi({
   }),
   endpoints: (builder) => ({
     login: builder.mutation({
-      query: (credentials) => ({
+      query: (email, password) => ({
         url: '/user/login/',
         method: 'POST',
-        body: credentials,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
       }),
     }),
     signup: builder.mutation({
-      query: (userData) => ({
+      query: (email, password) => ({
         url: '/user/signup/',
         method: 'POST',
-        body: userData,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
       }),
     }),
     getToken: builder.mutation({
