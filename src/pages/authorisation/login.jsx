@@ -2,16 +2,20 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useLoginMutation, useGetTokenMutation } from '../../services/api';
+import { useLoginMutation } from '../../services/api';
 import styles from '../../css/login.module.css';
 import logoBlack from '../../img/logo_black.png';
 // import { AppRoutes } from '../../routes';
 
-function LoginForm({ setUser }) {
+import { useDispatch } from 'react-redux';
+import { userLogin } from '../../store/authSlice';
+
+function LoginForm() {
+  const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const [login, { isLoading }] = useLoginMutation();
+  const dispatch = useDispatch();
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -24,9 +28,14 @@ function LoginForm({ setUser }) {
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      const credentials = { username, password };
-      const response = await login(credentials).unwrap();
-      setUser({ login: response.username });
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      const { token } = await response.json();
+      // Save the token in the store
+      dispatch(userLogin(token));
       navigate('/');
     } catch (error) {
       console.error('Login failed:', error);

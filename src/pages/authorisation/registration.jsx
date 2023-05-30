@@ -1,19 +1,19 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import { useMutation } from 'react-query';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSignupMutation, useGetTokenMutation } from '../../services/api';
+import { useDispatch } from 'react-redux';
 import styles from '../../css/login.module.css';
 import logoBlack from '../../img/logo_black.png';
+import { userLogin } from '../../store/authSlice';
 
 function RegistrationForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const navigate = useNavigate();
-  const [signup] = useSignupMutation();
-  const [token, setToken] = useState('');
+
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState('');
+
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
   };
@@ -26,29 +26,17 @@ function RegistrationForm() {
     setConfirmPassword(event.target.value);
   };
 
-  const tokenMutation = useMutation(useGetTokenMutation, {
-    onSuccess: (data) => {
-      const token = data.token;
-      setToken(token);
-
-      navigate('/');
-    },
-    onError: (error) => {
-      console.log('Error registering:', error);
-    },
-  });
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (password === confirmPassword) {
-      signup({ username, password });
-      try {
-        tokenMutation.mutate({ username, password });
-        navigate('/');
-      } catch (error) {
-        console.log('Error registering:', error);
-      }
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      const { token } = await response.json();
+      dispatch(userLogin(token));
     } else {
       console.log('Passwords do not match');
     }
