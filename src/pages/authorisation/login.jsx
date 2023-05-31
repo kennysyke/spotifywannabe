@@ -15,7 +15,7 @@ function LoginForm() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const loginMutation = useLoginMutation();
+  const [postLogin] = useLoginMutation();
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -28,10 +28,22 @@ function LoginForm() {
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await loginMutation.mutateAsync({ email, password }); // Use the login mutation from api.js
-      const { token, username, email } = data; // Extract the token, username, and email from the response
-      dispatch(userLogin({ token, username, email })); // Dispatch the userLogin action with the token, username, and email
-      navigate('/'); // Navigate to the desired page
+      postLogin({ email, password }).then((res) => {
+        console.log(res);
+        console.log(res.data.email);
+        console.log(res.data.username);
+        console.log(res.data.id);
+        console.log(res.data.token);
+        dispatch(
+          userLogin({
+            email: res.data.email,
+            userName: res.data.username,
+            id: res.data.id,
+            token: res.roken,
+          })
+        );
+        navigate('/');
+      });
     } catch (error) {
       console.error('Login failed:', error);
     }

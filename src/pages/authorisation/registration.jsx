@@ -1,12 +1,13 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import styles from '../../css/login.module.css';
 import logoBlack from '../../img/logo_black.png';
 import { userLogin } from '../../store/authSlice';
 import { useSignupMutation } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
+
+import { useDispatch } from 'react-redux';
 
 function RegistrationForm() {
   const [email, setEmail] = useState('');
@@ -14,9 +15,8 @@ function RegistrationForm() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
-
-  const signupMutation = useSignupMutation();
   const dispatch = useDispatch();
+  const [signUp] = useSignupMutation();
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -39,14 +39,18 @@ function RegistrationForm() {
 
     if (password === confirmPassword) {
       try {
-        const { data } = await signupMutation.mutateAsync({
-          email,
-          password,
-          username,
-        }); // Use the signup mutation from api.js
-        const { token, username, email } = data; // Extract the token, username, and email from the response
-        dispatch(userLogin({ token, username, email })); // Dispatch the userLogin action with the token, username, and email
-        navigate('/'); // Navigate to the desired page
+        signUp({ email, password, username }).then((res) => {
+          console.log(res);
+          dispatch(
+            userLogin({
+              email: res.email,
+              userName: res.username,
+              id: res.id,
+              token: res.roken,
+            })
+          );
+        });
+        navigate('/');
       } catch (error) {
         console.error('Registration failed:', error);
       }
@@ -55,6 +59,7 @@ function RegistrationForm() {
     }
   };
 
+  // asdfasdf321
   return (
     <div className={styles.form_box}>
       <form className={styles.form} onSubmit={handleSubmit}>
