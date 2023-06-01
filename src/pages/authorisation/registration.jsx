@@ -4,7 +4,7 @@ import { useState } from 'react';
 import styles from '../../css/login.module.css';
 import logoBlack from '../../img/logo_black.png';
 import { userLogin } from '../../store/authSlice';
-import { useSignupMutation } from '../../services/api';
+import { useSignupMutation, useGetTokenMutation } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
@@ -17,6 +17,7 @@ function RegistrationForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [signUp] = useSignupMutation();
+  const [getToken] = useGetTokenMutation();
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -39,17 +40,22 @@ function RegistrationForm() {
 
     if (password === confirmPassword) {
       try {
-        signUp({ email, password, username }).then((res) => {
-          console.log(res);
-          dispatch(
-            userLogin({
-              email: res.email,
-              userName: res.username,
-              id: res.id,
-              token: res.roken,
-            })
-          );
-        });
+        await getToken({ email, password })
+          .unwrap()
+          .then((tokenRes) => {
+            console.log(tokenRes);
+            signUp({ email, password }).then((res) => {
+              dispatch(
+                userLogin({
+                  email: res.data.email,
+                  username: res.data.username,
+                  id: res.data.id,
+                  token: tokenRes,
+                })
+              );
+              navigate('/');
+            });
+          });
         navigate('/');
       } catch (error) {
         console.error('Registration failed:', error);

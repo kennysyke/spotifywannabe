@@ -2,7 +2,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useLoginMutation } from '../../services/api';
+import { useLoginMutation, useGetTokenMutation } from '../../services/api';
 import styles from '../../css/login.module.css';
 import logoBlack from '../../img/logo_black.png';
 // import { AppRoutes } from '../../routes';
@@ -16,6 +16,7 @@ function LoginForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [postLogin] = useLoginMutation();
+  const [getToken] = useGetTokenMutation();
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -28,22 +29,26 @@ function LoginForm() {
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      postLogin({ email, password }).then((res) => {
-        console.log(res);
-        console.log(res.data.email);
-        console.log(res.data.username);
-        console.log(res.data.id);
-        console.log(res.data.token);
-        dispatch(
-          userLogin({
-            email: res.data.email,
-            userName: res.data.username,
-            id: res.data.id,
-            token: res.roken,
-          })
-        );
-        navigate('/');
-      });
+      await getToken({ email, password })
+        .unwrap()
+        .then((tokenRes) => {
+          console.log(tokenRes);
+          postLogin({ email, password }).then((res) => {
+            console.log(res);
+            console.log(res.data.email);
+            console.log(res.data.username);
+            console.log(res.data.id);
+            dispatch(
+              userLogin({
+                email: res.data.email,
+                username: res.data.username,
+                id: res.data.id,
+                token: tokenRes,
+              })
+            );
+            navigate('/');
+          });
+        });
     } catch (error) {
       console.error('Login failed:', error);
     }

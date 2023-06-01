@@ -23,7 +23,7 @@ export const api = createApi({
       }),
     }),
     getToken: builder.mutation({
-      query: () => '/user/token/',
+      query: (body) => ({ url: '/user/token/', method: 'POST', body }),
     }),
     refreshToken: builder.mutation({
       query: (refreshToken) => ({
