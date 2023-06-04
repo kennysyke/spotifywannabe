@@ -23,7 +23,7 @@ export const api = createApi({
       }),
     }),
     getToken: builder.mutation({
-      query: (body) => ({ url: '/user/token/', method: 'POST', body }),
+      query: (body) => ({ url: '/user/token/', method: 'POST', body: body }),
     }),
     refreshToken: builder.mutation({
       query: (refreshToken) => ({
@@ -34,6 +34,7 @@ export const api = createApi({
     }),
     getAllTracks: builder.query({
       query: () => '/catalog/track/all/',
+      method: 'GET',
     }),
     addToFavorites: builder.mutation({
       query: (id) => `track/${id}/favorite/`,
@@ -42,6 +43,10 @@ export const api = createApi({
     removeFromFavorites: builder.mutation({
       query: (id) => `track/${id}/favorite/`,
       method: 'DELETE',
+    }),
+    getFavTracks: builder.query({
+      query: () => '/catalog/track/favourite/all/',
+      method: 'GET',
     }),
   }),
 });
@@ -54,4 +59,5 @@ export const {
   useGetAllTracksQuery,
   useAddToFavoritesMutation,
   useRemoveFromFavoritesMutation,
+  useGetFavTracksQuery,
 } = api;

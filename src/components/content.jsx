@@ -17,7 +17,7 @@ function Content() {
       <div className={styles.centerblock__content}>Error fetching tracks.</div>
     );
   }
-
+console.log(tracks);
   return (
     <div className={styles.centerblock__content}>
       <div className={styles.content__title}>

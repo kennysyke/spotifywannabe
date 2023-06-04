@@ -10,7 +10,7 @@ import logoBlack from '../../img/logo_black.png';
 import { useDispatch } from 'react-redux';
 import { userLogin } from '../../store/authSlice';
 
-function LoginForm() {
+function LoginForm({ setUser }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -32,12 +32,9 @@ function LoginForm() {
       await getToken({ email, password })
         .unwrap()
         .then((tokenRes) => {
-          console.log(tokenRes);
+          console.log(tokenRes.refresh);
+          localStorage.setItem('token', tokenRes.refresh);
           postLogin({ email, password }).then((res) => {
-            console.log(res);
-            console.log(res.data.email);
-            console.log(res.data.username);
-            console.log(res.data.id);
             dispatch(
               userLogin({
                 email: res.data.email,
@@ -46,8 +43,10 @@ function LoginForm() {
                 token: tokenRes,
               })
             );
-            navigate('/');
           });
+          console.log(localStorage.getItem('token'));
+          setUser(localStorage.getItem('token'));
+          navigate('/');
         });
     } catch (error) {
       console.error('Login failed:', error);
