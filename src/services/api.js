@@ -32,21 +32,20 @@ export const api = createApi({
         body: { refresh: refreshToken },
       }),
     }),
-    getAllTracks: builder.query({
-      query: () => '/catalog/track/all/',
-      method: 'GET',
-    }),
-    addToFavorites: builder.mutation({
-      query: (id) => `track/${id}/favorite/`,
-      method: 'POST',
-    }),
-    removeFromFavorites: builder.mutation({
-      query: (id) => `track/${id}/favorite/`,
-      method: 'DELETE',
-    }),
     getFavTracks: builder.query({
       query: () => '/catalog/track/favourite/all/',
       method: 'GET',
+    }),
+    getSelection: builder.query({
+      query: () => '/catalog/selection/',
+      method: 'GET',
+    }),
+    getSelectionById: builder.query({
+      query: (id) => `/catalog/selection/${id}/`,
+      method: 'GET',
+    }),
+    getAllTracks: builder.query({
+      query: () => '/catalog/track/all/',
     }),
   }),
 });
@@ -56,8 +55,8 @@ export const {
   useSignupMutation,
   useGetTokenMutation,
   useRefreshTokenMutation,
-  useGetAllTracksQuery,
-  useAddToFavoritesMutation,
-  useRemoveFromFavoritesMutation,
   useGetFavTracksQuery,
+  useGetSelectionQuery,
+  useGetSelectionByIdQuery,
+  useGetAllTracksQuery,
 } = api;

@@ -4,7 +4,8 @@ import LoginForm from '../pages/authorisation/login';
 import { ProtectedRoute } from '../components/protected-route';
 import Center from '../components/center';
 import RegistrationForm from '../pages/authorisation/registration';
-// import PlaylistContent from '../components/playlistContent';
+import PlaylistPage from '../components/playlistPage';
+import FavPage from '../components/favPage';
 
 export const AppRoutes = ({ user, setUser }) => {
   return (
@@ -14,8 +15,8 @@ export const AppRoutes = ({ user, setUser }) => {
 
       <Route element={<ProtectedRoute isAllowed={Boolean(user)} />}>
         <Route path="/" element={<Center />} />
-        <Route path="/playlist/:id" element={<Center />} />
-        <Route path="/favourite" element={<Center />} />
+        <Route path="/playlist/:id" element={<PlaylistPage />} />
+        <Route path="/favourite" element={<FavPage />} />
       </Route>
     </Routes>
   );

@@ -1,15 +1,25 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useRef, useContext, useEffect } from 'react';
 import TrackPlay from './trackPlay';
 import Sprite from '../img/icon/sprite.svg';
 import { ThemeContext, themes } from '../dynamic/contexts/theme';
 import styles from '../css/bar.module.css';
 
+import { useSelector } from 'react-redux';
 function Bar() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
+  const selectedSong = useSelector((state) => state.selectedSong);
+  const { theme } = useContext(ThemeContext);
   const audioRef = useRef(null);
 
-  const { theme } = useContext(ThemeContext);
+  useEffect(() => {
+    if (selectedSong) {
+      audioRef.current.src = selectedSong.track_file;
+      audioRef.current.play();
+      setIsPlaying(!isPlaying);
+      console.log(selectedSong);
+    }
+  }, [selectedSong]);
 
   const togglePlay = () => {
     const audio = audioRef.current;
@@ -59,8 +69,8 @@ function Bar() {
           <div className={`${styles.bar__player} player`}>
             <PlayerControls isPlaying={isPlaying} togglePlay={togglePlay} />
             <TrackPlay
-              author="Linkin Park"
-              album="Meteora"
+              author={selectedSong ? selectedSong.author : ''}
+              album={selectedSong ? selectedSong.album : ''}
               audioRef={audioRef}
               updateProgress={updateProgress}
             />

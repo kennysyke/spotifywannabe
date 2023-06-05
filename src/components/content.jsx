@@ -1,13 +1,10 @@
 import React from 'react';
 import Sprite from '../img/icon/sprite.svg';
 import PlaylistItem from './playlistItem';
-import { useGetAllTracksQuery } from '../services/api';
-
 import styles from '../css/content.module.css';
 
-function Content() {
-  const { data: tracks, isLoading, isFetching } = useGetAllTracksQuery();
-
+function Content({ tracks, isLoading, isFetching }) {
+  console.log(tracks);
   if (isLoading || isFetching) {
     return <div className={styles.centerblock__content}>Loading...</div>;
   }
@@ -17,7 +14,7 @@ function Content() {
       <div className={styles.centerblock__content}>Error fetching tracks.</div>
     );
   }
-console.log(tracks);
+
   return (
     <div className={styles.centerblock__content}>
       <div className={styles.content__title}>

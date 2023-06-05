@@ -3,7 +3,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 import { Link } from 'react-router-dom';
-import { selections } from '../mock/selection';
+import { useGetSelectionQuery } from '../services/api';
 
 import playlist1 from '../img/playlist01.png';
 import playlist2 from '../img/playlist02.png';
@@ -13,6 +13,9 @@ import styles from '../css/sidebarPlaylist.module.css';
 
 function SidebarPlaylist() {
   const [isLoading, setIsLoading] = useState(true);
+
+  const { data: list } = useGetSelectionQuery();
+  console.log(list);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -42,7 +45,7 @@ function SidebarPlaylist() {
         </SkeletonTheme>
       ) : (
         <div className={styles.sidebar__list}>
-          {selections.map((playlist) => (
+          {list.map((playlist) => (
             <div className={styles.sidebar__item} key={playlist.id}>
               <Link
                 className={styles.sidebar__link}

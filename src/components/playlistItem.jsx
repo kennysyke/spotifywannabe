@@ -5,25 +5,43 @@ import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import Sprite from '../img/icon/sprite.svg';
 import { ThemeContext } from '../dynamic/contexts/theme';
-
 import styles from '../css/playlistItem.module.css';
 import s from '../css/trackPlay.module.css';
 
-function PlaylistItem(
+import { useDispatch } from 'react-redux';
+import { selectSong } from '../store/selectedSongSlice';
+
+function PlaylistItem({
   id,
   name,
   track_file,
   author,
   album,
   duration_in_seconds,
-  isFavorite
-) {
+  isFavorite,
+}) {
   const [isLoading, setIsLoading] = useState(true);
   const { theme } = useContext(ThemeContext);
+
+  const dispatch = useDispatch();
+  const handleSelectSong = (e) => {
+    e.preventDefault;
+    dispatch(
+      selectSong({
+        name,
+        track_file,
+        author,
+        album,
+        duration_in_seconds,
+        isFavorite,
+      })
+    );
+    console.log(selectSong);
+  };
+
   const handleFavorite = () => {
     handleFavorite(id);
   };
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -33,7 +51,7 @@ function PlaylistItem(
   }, []);
 
   return (
-    <div className={styles.playlist__item}>
+    <div className={styles.playlist__item} onClick={handleSelectSong}>
       {isLoading ? (
         <div className={`${styles.playlist__track} track`}>
           <div className={styles.track__title}>

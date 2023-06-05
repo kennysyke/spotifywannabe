@@ -6,9 +6,9 @@ import { ThemeContext } from '../dynamic/contexts/theme';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import {
-  useAddToFavoritesMutation,
-  useRemoveFromFavoritesMutation,
-} from '../services/api';
+  useSetLikeMutation,
+  useSetDislikeMutation,
+} from '../services/tracksApi';
 import styles from '../css/trackPlay.module.css';
 
 const TrackPlayImage = () => {
@@ -106,9 +106,9 @@ const TrackPlay = ({
   updateProgress,
   isFavourite,
 }) => {
-  const [addToFavorites, addToFavoritesResult] = useAddToFavoritesMutation();
+  const [addToFavorites, addToFavoritesResult] = useSetLikeMutation();
   const [removeFromFavorites, removeFromFavoritesResult] =
-    useRemoveFromFavoritesMutation();
+    useSetDislikeMutation();
 
   const handleFavorite = () => {
     if (isFavourite) {
