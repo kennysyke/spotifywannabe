@@ -36,10 +36,6 @@ export const api = createApi({
       query: () => '/catalog/track/favourite/all/',
       method: 'GET',
     }),
-    getSelection: builder.query({
-      query: () => '/catalog/selection/',
-      method: 'GET',
-    }),
     getSelectionById: builder.query({
       query: (id) => `/catalog/selection/${id}/`,
       method: 'GET',
@@ -56,7 +52,6 @@ export const {
   useGetTokenMutation,
   useRefreshTokenMutation,
   useGetFavTracksQuery,
-  useGetSelectionQuery,
   useGetSelectionByIdQuery,
   useGetAllTracksQuery,
 } = api;

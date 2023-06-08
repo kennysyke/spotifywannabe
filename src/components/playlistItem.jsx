@@ -8,8 +8,8 @@ import { ThemeContext } from '../dynamic/contexts/theme';
 import styles from '../css/playlistItem.module.css';
 import s from '../css/trackPlay.module.css';
 
-import { useDispatch } from 'react-redux';
-import { selectSong } from '../store/selectedSongSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSelectedSongIndex } from '../actions/actions';
 
 function PlaylistItem({
   id,
@@ -22,21 +22,18 @@ function PlaylistItem({
 }) {
   const [isLoading, setIsLoading] = useState(true);
   const { theme } = useContext(ThemeContext);
+  // const dispatch = useDispatch();
 
-  const dispatch = useDispatch();
+  const currentPlaylist = useSelector((state) => state.currentPlaylist);
+  console.log(currentPlaylist);
+
+  // const selectedIndex = currentPlaylist.findIndex((song) => song.id === id);
+  // console.log(selectedIndex);
+
   const handleSelectSong = (e) => {
     e.preventDefault;
-    dispatch(
-      selectSong({
-        name,
-        track_file,
-        author,
-        album,
-        duration_in_seconds,
-        isFavorite,
-      })
-    );
-    console.log(selectSong);
+    // dispatch(setSelectedSongIndex({ selectedIndex }));
+    // console.log(selectedIndex);
   };
 
   const handleFavorite = () => {

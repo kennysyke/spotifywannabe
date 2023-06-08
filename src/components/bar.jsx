@@ -1,33 +1,71 @@
-import React, { useState, useRef, useContext, useEffect } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import TrackPlay from './trackPlay';
 import Sprite from '../img/icon/sprite.svg';
 import { ThemeContext, themes } from '../dynamic/contexts/theme';
 import styles from '../css/bar.module.css';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { setSelectedSongIndex } from '../actions/actions';
 
-import { useSelector } from 'react-redux';
 function Bar() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
-  const selectedSong = useSelector((state) => state.selectedSong);
   const { theme } = useContext(ThemeContext);
   const audioRef = useRef(null);
+  // const currentPlaylist = useSelector((state) => state.currentPlaylist);
+  // const selectedSongIndex = useSelector((state) => state.selectedSongIndex);
+  // const selectedSong = currentPlaylist[selectedSongIndex];
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (selectedSong) {
-      audioRef.current.src = selectedSong.track_file;
-      audioRef.current.play();
-      setIsPlaying(!isPlaying);
-      console.log(selectedSong);
-    }
-  }, [selectedSong]);
+  const playSong = () => {
+    setIsPlaying(true);
+    audioRef.current.play();
+  };
+
+  const pauseSong = () => {
+    setIsPlaying(false);
+    audioRef.current.pause();
+  };
+
+  const playNextSong = () => {
+    // const nextIndex = selectedSongIndex + 1;
+    // if (nextIndex < currentPlaylist.length) {
+    //   dispatch(setSelectedSongIndex(nextIndex)); // Dispatch the action to update selectedSongIndex
+    setIsPlaying(true);
+  };
+
+  const playPreviousSong = () => {
+    // const previousIndex = selectedSongIndex - 1;
+    // if (previousIndex >= 0) {
+    //   dispatch(setSelectedSongIndex(previousIndex)); // Dispatch the action to update selectedSongIndex
+    setIsPlaying(true);
+  };
+
+  // useEffect(() => {
+  //   if (selectedSongIndex !== null) {
+  //     const selectedSong = currentPlaylist[selectedSongIndex];
+  //     audioRef.current.src = selectedSong.track_file;
+  //     if (isPlaying) {
+  //       playSong();
+  //     } else {
+  //       pauseSong();
+  //     }
+  //   }
+  // }, [selectedSongIndex, isPlaying, currentPlaylist]);
+
+  // // useEffect(() => {
+  // //   if (selectedSong) {
+  // //     audioRef.current.src = selectedSong.track_file;
+  // //     audioRef.current.play();
+  // //     setIsPlaying(!isPlaying);
+  // //     console.log(selectedSong);
+  // //   }
+  // // }, [selectedSong]);
 
   const togglePlay = () => {
-    const audio = audioRef.current;
-
     if (isPlaying) {
-      audio.pause();
+      playSong();
     } else {
-      audio.play();
+      pauseSong();
     }
 
     setIsPlaying(!isPlaying);
@@ -67,10 +105,17 @@ function Bar() {
         <PlayerProgress progress={progress} onClick={handleProgressClick} />
         <div className={styles.bar__player_block}>
           <div className={`${styles.bar__player} player`}>
-            <PlayerControls isPlaying={isPlaying} togglePlay={togglePlay} />
+            <PlayerControls
+              isPlaying={isPlaying}
+              togglePlay={togglePlay}
+              playNextSong={playNextSong}
+              playPreviousSong={playPreviousSong}
+            />
             <TrackPlay
-              author={selectedSong ? selectedSong.author : ''}
-              album={selectedSong ? selectedSong.album : ''}
+              // author={selectedSong ? selectedSong.author : ''}
+              // album={selectedSong ? selectedSong.album : ''}
+              author="LP"
+              album="Meteora"
               audioRef={audioRef}
               updateProgress={updateProgress}
             />
@@ -82,30 +127,36 @@ function Bar() {
   );
 }
 
-function PlayerProgress({ progress }) {
+function PlayerProgress({ progress, onClick }) {
   return (
     <div
       className={styles.bar__player_progress}
       style={{ width: `${progress}%` }}
+      onClick={onClick}
     ></div>
   );
 }
 
-function PlayerControls({ isPlaying, togglePlay }) {
+function PlayerControls({
+  isPlaying,
+  togglePlay,
+  playPreviousSong,
+  playNextSong,
+}) {
   return (
     <div className={styles.player__controls}>
-      <PlayerBtnPrev />
+      <PlayerBtnPrev playPreviousSong={playPreviousSong} />
       <PlayerBtnPlay isPlaying={isPlaying} togglePlay={togglePlay} />
-      <PlayerBtnNext />
+      <PlayerBtnNext playNextSong={playNextSong} />
       <PlayerBtnRepeat />
       <PlayerBtnShuffle />
     </div>
   );
 }
 
-function PlayerBtnPrev() {
+function PlayerBtnPrev({ playPreviousSong }) {
   return (
-    <div className={styles.player__btn_prev}>
+    <div className={styles.player__btn_prev} onClick={playPreviousSong}>
       <svg className={styles.player__btn_prev_svg} alt="prev">
         <use xlinkHref={`${Sprite}#icon-prev`}></use>
       </svg>
@@ -126,9 +177,9 @@ function PlayerBtnPlay({ isPlaying, togglePlay }) {
   );
 }
 
-function PlayerBtnNext() {
+function PlayerBtnNext({ playNextSong }) {
   return (
-    <div className={styles.player__btn_next}>
+    <div className={styles.player__btn_next} onClick={playNextSong}>
       <svg className={styles.player__btn_next_svg} alt="next">
         <use xlinkHref={`${Sprite}#icon-next`}></use>
       </svg>

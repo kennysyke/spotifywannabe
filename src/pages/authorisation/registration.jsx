@@ -6,10 +6,9 @@ import logoBlack from '../../img/logo_black.png';
 import { userLogin } from '../../store/authSlice';
 import { useSignupMutation, useGetTokenMutation } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
-
 import { useDispatch } from 'react-redux';
 
-function RegistrationForm() {
+function RegistrationForm({ setUser }) {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -44,6 +43,7 @@ function RegistrationForm() {
           .unwrap()
           .then((tokenRes) => {
             console.log(tokenRes);
+            localStorage.setItem('token', tokenRes.refresh);
             signUp({ email, password }).then((res) => {
               dispatch(
                 userLogin({
@@ -53,10 +53,11 @@ function RegistrationForm() {
                   token: tokenRes,
                 })
               );
-              navigate('/');
             });
+            console.log(localStorage.getItem('token'));
+            setUser(localStorage.getItem('token'));
+            navigate('/');
           });
-        navigate('/');
       } catch (error) {
         console.error('Registration failed:', error);
       }

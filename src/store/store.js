@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { api } from '../services/api';
 import { tracksApi } from '../services/tracksApi';
 import authReducer from './authSlice';
-import selectedSongReducer from './selectedSongSlice';
+import selectedSongReducer from './selectedSong';
 
 export const store = configureStore({
   reducer: {

@@ -3,7 +3,6 @@ import Search from './search';
 import Content from './content';
 import DropDownComponent from './dropdownAll';
 import { useParams } from 'react-router-dom';
-
 import styles from '../css/center.module.css';
 
 import { useGetSelectionByIdQuery } from '../services/api';
@@ -14,12 +13,9 @@ function PlaylistPage() {
   const id = Number(params.id);
   console.log(id);
 
-  const {
-    data: { items: tracks },
-    isLoading,
-    isFetching,
-  } = useGetSelectionByIdQuery(id);
+  const { data, isLoading, isFetching } = useGetSelectionByIdQuery(id);
 
+  const tracks = data?.items; // Access items only if data exists
   console.log(tracks);
 
   return (
