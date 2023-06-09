@@ -3,15 +3,24 @@ import TrackPlay from './trackPlay';
 import Sprite from '../img/icon/sprite.svg';
 import { ThemeContext, themes } from '../dynamic/contexts/theme';
 import styles from '../css/bar.module.css';
-import { useSelector } from 'react-redux';
-// import { setSelectedSongIndex } from '../actions/actions';
+import { useSelector, useDispatch } from 'react-redux';
+import { useGetAllTracksQuery } from '../services/api';
+import { selectSong } from '../store/selectSongSlice';
 
 function Bar() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
-  const selectedSong = useSelector((state) => state.selectedSong);
+  const dispatch = useDispatch();
   const { theme } = useContext(ThemeContext);
+
+  const selectedSong = useSelector((state) => state.selectedSong);
   const audioRef = useRef(null);
+
+  const { data: tracks } = useGetAllTracksQuery();
+
+  // const selectedSongIndex = tracks.findIndex(
+  //   (song) => song.id === selectedSong.id
+  // );
 
   useEffect(() => {
     if (selectedSong) {
@@ -21,6 +30,48 @@ function Bar() {
       console.log(selectedSong);
     }
   }, [selectedSong]);
+
+  const updateSelectedSong = (newTrack) => {
+    dispatch(selectSong(newTrack));
+  };
+
+  const playNextSong = () => {
+    if (selectedSong) {
+      const selectedSongIndex = tracks.findIndex(
+        (song) => song.id === selectedSong.id
+      );
+      const nextSongIndex = selectedSongIndex + 1;
+      if (nextSongIndex < tracks.length) {
+        const nextSong = tracks[nextSongIndex];
+        console.log(nextSong);
+        audioRef.current.src = nextSong.track_file;
+        console.log(audioRef.current.src);
+        audioRef.current.play();
+        setIsPlaying(true);
+        updateSelectedSong(nextSong);
+      } else {
+        console.log('error');
+      }
+    }
+  };
+
+  const playPreviousSong = () => {
+    if (selectedSong) {
+      const selectedSongIndex = tracks.findIndex(
+        (song) => song.id === selectedSong.id
+      );
+      const previousSongIndex = selectedSongIndex - 1;
+
+      if (previousSongIndex >= 0) {
+        const previousSong = tracks[previousSongIndex];
+        audioRef.current.src = previousSong.track_file;
+        audioRef.current.play();
+        setIsPlaying(true);
+      } else {
+        console.log('error');
+      }
+    }
+  };
 
   const togglePlay = () => {
     const audio = audioRef.current;
@@ -57,11 +108,6 @@ function Bar() {
   };
 
   return (
-    // <>
-    //   <audio controls ref={audioRef}>
-    //     <source src="../../public/audio/song.mp3" type="audio/mpeg" />
-    //   </audio>
-
     <div
       className={styles.bar}
       style={{ backgroundColor: theme.background, color: theme.color }}
@@ -70,7 +116,12 @@ function Bar() {
         <PlayerProgress progress={progress} onClick={handleClickProgress} />
         <div className={styles.bar__player_block}>
           <div className={`${styles.bar__player} player`}>
-            <PlayerControls isPlaying={isPlaying} togglePlay={togglePlay} />
+            <PlayerControls
+              isPlaying={isPlaying}
+              togglePlay={togglePlay}
+              playNextSong={playNextSong}
+              playPreviousSong={playPreviousSong}
+            />
             <TrackPlay
               author={selectedSong ? selectedSong.author : ''}
               album={selectedSong ? selectedSong.album : ''}
@@ -112,21 +163,26 @@ function PlayerProgress({ progress, onClick }) {
   );
 }
 
-function PlayerControls({ isPlaying, togglePlay }) {
+function PlayerControls({
+  isPlaying,
+  togglePlay,
+  playNextSong,
+  playPreviousSong,
+}) {
   return (
     <div className={styles.player__controls}>
-      <PlayerBtnPrev />
+      <PlayerBtnPrev playPreviousSong={playPreviousSong} />
       <PlayerBtnPlay isPlaying={isPlaying} togglePlay={togglePlay} />
-      <PlayerBtnNext />
+      <PlayerBtnNext playNextSong={playNextSong} />
       <PlayerBtnRepeat />
       <PlayerBtnShuffle />
     </div>
   );
 }
 
-function PlayerBtnPrev() {
+function PlayerBtnPrev({ playPreviousSong }) {
   return (
-    <div className={styles.player__btn_prev}>
+    <div className={styles.player__btn_prev} onClick={playPreviousSong}>
       <svg className={styles.player__btn_prev_svg} alt="prev">
         <use xlinkHref={`${Sprite}#icon-prev`}></use>
       </svg>
@@ -147,9 +203,9 @@ function PlayerBtnPlay({ isPlaying, togglePlay }) {
   );
 }
 
-function PlayerBtnNext() {
+function PlayerBtnNext({ playNextSong }) {
   return (
-    <div className={styles.player__btn_next}>
+    <div className={styles.player__btn_next} onClick={playNextSong}>
       <svg className={styles.player__btn_next_svg} alt="next">
         <use xlinkHref={`${Sprite}#icon-next`}></use>
       </svg>

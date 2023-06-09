@@ -12,7 +12,6 @@ import {
   useSetDislikeMutation,
 } from '../services/tracksApi';
 import { useDispatch } from 'react-redux';
-import setTrack from '../store/trackSlice';
 import { selectSong } from '../store/selectSongSlice';
 
 function PlaylistItem({
