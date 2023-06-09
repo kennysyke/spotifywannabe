@@ -3,9 +3,9 @@ import React from 'react';
 import { useState } from 'react';
 import styles from '../../css/login.module.css';
 import logoBlack from '../../img/logo_black.png';
-import { useSignupMutation, useGetTokenMutation } from '../../services/api';
+import { useSignupMutation } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+
 
 function RegistrationForm() {
   const [email, setEmail] = useState('');
@@ -42,9 +42,9 @@ function RegistrationForm() {
       email: email,
       username: username,
       password: password,
-    });
-    if (isSuccess) navigate('/login');
+    }).unwrap();
   };
+  if (isSuccess) navigate('/login');
   if (isError) console.log(isError);
   // asdfasdf321
   return (

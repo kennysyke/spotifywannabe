@@ -13,58 +13,22 @@ function Bar() {
   const { theme } = useContext(ThemeContext);
   const audioRef = useRef(null);
 
-  const playSong = () => {
-    setIsPlaying(true);
-    audioRef.current.play();
-  };
-
-  const pauseSong = () => {
-    setIsPlaying(false);
-    audioRef.current.pause();
-  };
-
-  const playNextSong = () => {
-    // const nextIndex = selectedSongIndex + 1;
-    // if (nextIndex < currentPlaylist.length) {
-    //   dispatch(setSelectedSongIndex(nextIndex)); // Dispatch the action to update selectedSongIndex
-    setIsPlaying(true);
-  };
-
-  const playPreviousSong = () => {
-    // const previousIndex = selectedSongIndex - 1;
-    // if (previousIndex >= 0) {
-    //   dispatch(setSelectedSongIndex(previousIndex)); // Dispatch the action to update selectedSongIndex
-    setIsPlaying(true);
-  };
-
-  // useEffect(() => {
-  //   if (selectedSongIndex !== null) {
-  //     const selectedSong = currentPlaylist[selectedSongIndex];
-  //     audioRef.current.src = selectedSong.track_file;
-  //     if (isPlaying) {
-  //       playSong();
-  //     } else {
-  //       pauseSong();
-  //     }
-  //   }
-  // }, [selectedSongIndex, isPlaying, currentPlaylist]);
-
   useEffect(() => {
     if (selectedSong) {
       audioRef.current.src = selectedSong.track_file;
       audioRef.current.play();
-      setIsPlaying(!isPlaying);
+      setIsPlaying(true);
       console.log(selectedSong);
     }
   }, [selectedSong]);
 
   const togglePlay = () => {
+    const audio = audioRef.current;
     if (isPlaying) {
-      playSong();
+      audio.pause();
     } else {
-      pauseSong();
+      audio.play();
     }
-
     setIsPlaying(!isPlaying);
   };
 
@@ -74,18 +38,22 @@ function Bar() {
     setProgress(progressPercentage);
   };
 
-  const handleProgressClick = (event) => {
-    const progressBar = event.target;
-    const boundingRect = progressBar.getBoundingClientRect();
-    const clickedX = event.clientX - boundingRect.left;
-    const progressBarWidth = boundingRect.width;
-    const clickedPercentage = (clickedX / progressBarWidth) * 100;
-
+  const handleClickProgress = (clickedPercentage) => {
     const audio = audioRef.current;
-    const newTime = (audio.duration / 100) * clickedPercentage;
+    const duration = audio.duration;
+    console.log(duration);
+    const newTime = (clickedPercentage / 100) * duration;
+    console.log(newTime);
     audio.currentTime = newTime;
+  };
 
-    setProgress(clickedPercentage);
+  const [volume, setVolume] = useState(50);
+
+  const handleVolumeChange = (event) => {
+    const newVolume = event.target.value;
+    console.log(newVolume);
+    setVolume(newVolume);
+    audioRef.current.volume = newVolume / 100;
   };
 
   return (
@@ -99,15 +67,10 @@ function Bar() {
       style={{ backgroundColor: theme.background, color: theme.color }}
     >
       <div className={styles.bar__content}>
-        <PlayerProgress progress={progress} onClick={handleProgressClick} />
+        <PlayerProgress progress={progress} onClick={handleClickProgress} />
         <div className={styles.bar__player_block}>
           <div className={`${styles.bar__player} player`}>
-            <PlayerControls
-              isPlaying={isPlaying}
-              togglePlay={togglePlay}
-              playNextSong={playNextSong}
-              playPreviousSong={playPreviousSong}
-            />
+            <PlayerControls isPlaying={isPlaying} togglePlay={togglePlay} />
             <TrackPlay
               author={selectedSong ? selectedSong.author : ''}
               album={selectedSong ? selectedSong.album : ''}
@@ -115,7 +78,11 @@ function Bar() {
               updateProgress={updateProgress}
             />
           </div>
-          <Volume />
+          <Volume
+            audio={audioRef}
+            handleVolumeChange={handleVolumeChange}
+            volume={volume}
+          />
         </div>
       </div>
     </div>
@@ -123,35 +90,43 @@ function Bar() {
 }
 
 function PlayerProgress({ progress, onClick }) {
+  const progressBarRef = useRef(null);
+
+  const handleClick = (event) => {
+    const progressBar = progressBarRef.current;
+    const boundingRect = progressBar.getBoundingClientRect();
+    const clickedX = event.clientX - boundingRect.left;
+    const totalWidth = boundingRect.width;
+    const clickedPercentage = (clickedX / totalWidth) * 100;
+
+    onClick(clickedPercentage);
+  };
+
   return (
     <div
       className={styles.bar__player_progress}
       style={{ width: `${progress}%` }}
-      onClick={onClick}
+      onClick={handleClick}
+      ref={progressBarRef}
     ></div>
   );
 }
 
-function PlayerControls({
-  isPlaying,
-  togglePlay,
-  playPreviousSong,
-  playNextSong,
-}) {
+function PlayerControls({ isPlaying, togglePlay }) {
   return (
     <div className={styles.player__controls}>
-      <PlayerBtnPrev playPreviousSong={playPreviousSong} />
+      <PlayerBtnPrev />
       <PlayerBtnPlay isPlaying={isPlaying} togglePlay={togglePlay} />
-      <PlayerBtnNext playNextSong={playNextSong} />
+      <PlayerBtnNext />
       <PlayerBtnRepeat />
       <PlayerBtnShuffle />
     </div>
   );
 }
 
-function PlayerBtnPrev({ playPreviousSong }) {
+function PlayerBtnPrev() {
   return (
-    <div className={styles.player__btn_prev} onClick={playPreviousSong}>
+    <div className={styles.player__btn_prev}>
       <svg className={styles.player__btn_prev_svg} alt="prev">
         <use xlinkHref={`${Sprite}#icon-prev`}></use>
       </svg>
@@ -172,9 +147,9 @@ function PlayerBtnPlay({ isPlaying, togglePlay }) {
   );
 }
 
-function PlayerBtnNext({ playNextSong }) {
+function PlayerBtnNext() {
   return (
-    <div className={styles.player__btn_next} onClick={playNextSong}>
+    <div className={styles.player__btn_next}>
       <svg className={styles.player__btn_next_svg} alt="next">
         <use xlinkHref={`${Sprite}#icon-next`}></use>
       </svg>
@@ -202,19 +177,14 @@ function PlayerBtnShuffle() {
   );
 }
 
-function Volume() {
-  // const [volume, setVolume] = useState(1);
-  // const [muted, setMuted] = useState(false);
+function Volume({ handleVolumeChange, volume }) {
   const { theme } = useContext(ThemeContext);
+
   return (
     <div className={`${styles.bar__volume_block} volume`}>
       <div className={styles.volume__content}>
         <div className={styles.volume__image}>
-          <svg
-            className={styles.volume__svg}
-            // onClick={() => setMuted((m) => !m)}
-            alt="volume"
-          >
+          <svg className={styles.volume__svg} alt="volume">
             <use
               xlinkHref={`${Sprite}#icon-${
                 theme === themes.dark ? 'volume' : 'volume-light'
@@ -231,10 +201,8 @@ function Volume() {
             }}
             type="range"
             name="range"
-            // value={volume}
-            // onChange={(event) => {
-            //   setVolume(event.target.valueAsNumber);
-            // }}
+            value={volume}
+            onChange={handleVolumeChange}
           />
         </div>
       </div>

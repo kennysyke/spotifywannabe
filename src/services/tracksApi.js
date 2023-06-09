@@ -6,7 +6,7 @@ export const tracksApi = createApi({
     baseUrl: 'https://painassasin.online',
     tagTypes: ['Tracks'],
     prepareHeaders: (headers, { getState }) => {
-      const token = getState().user.access;
+      const token = getState().auth.access;
       //   console.log(token)
       if (token) {
         headers.set('authorization', `Bearer ${token}`);

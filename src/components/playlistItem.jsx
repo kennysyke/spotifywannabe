@@ -7,61 +7,63 @@ import Sprite from '../img/icon/sprite.svg';
 import { ThemeContext } from '../dynamic/contexts/theme';
 import styles from '../css/playlistItem.module.css';
 import s from '../css/trackPlay.module.css';
-// import {
-//   useSetLikeMutation,
-//   useSetDislikeMutation,
-// } from '../services/tracksApi';
+import {
+  useSetLikeMutation,
+  useSetDislikeMutation,
+} from '../services/tracksApi';
 import { useDispatch } from 'react-redux';
 import setTrack from '../store/trackSlice';
-import selectSong from '../store/selectSongSlice';
-
+import { selectSong } from '../store/selectSongSlice';
 
 function PlaylistItem({
+  track,
   id,
   name,
   track_file,
   author,
   album,
   duration_in_seconds,
-  isFavorite,
 }) {
-  // const [setLike] = useSetLikeMutation();
-  // const [setUnlike] = useSetDislikeMutation();
+  const { id: trackID, stared_user } = track;
+  const [setLike] = useSetLikeMutation();
+  const [setUnlike] = useSetDislikeMutation();
+  const dispatch = useDispatch();
+
   const [isLoading, setIsLoading] = useState(true);
   const { theme } = useContext(ThemeContext);
-  // const selectUserID = (state) => Number(state.tracksApi.id);
-  // const userID = useSelector(selectUserID);
-  // const [isFavorite, setFavourite] = useState(false);
-  const dispatch = useDispatch();
+
+  const userId = Number(localStorage.getItem('userID'));
+  const [isFavorite, setFavourite] = useState(false);
+
+  useEffect(() => {
+    setFavourite(
+      stared_user.some((user) => Number(user.id) === Number(userId))
+    );
+  }, [track]);
 
   const handleSelectSong = (e) => {
     e.preventDefault;
     dispatch(
       selectSong({
+        id,
         name,
         track_file,
         author,
         album,
         duration_in_seconds,
-        isFavorite,
       })
     );
     console.log(selectSong);
   };
 
-  // useEffect(() => {
-  //   setFavourite(
-  //     stared_user.some((user) => Number(user.id) === Number(userID))
-  //   );
-  // }, [track]);
-
-  // const handleFavorite = () => {
-  //   if (isFavorite) {
-  //     setUnlike(trackID);
-  //   } else {
-  //     setLike(trackID);
-  //   }
-  // };
+  const handleFavorite = () => {
+    if (isFavorite) {
+      console.log(trackID);
+      setUnlike(trackID);
+    } else {
+      setLike(trackID);
+    }
+  };
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -107,7 +109,7 @@ function PlaylistItem({
               </svg>
             </div>
             <div className={styles.track__title_text}>
-              <a className={styles.track__title_link} href={track_file}>
+              <a className={styles.track__title_link}>
                 <span
                   className={styles.track__title_span}
                   style={{
@@ -133,8 +135,15 @@ function PlaylistItem({
             <span className={styles.track__album_link}>{album}</span>
           </div>
           <div className={styles.track__time}>
-            <svg className={styles.track__time_svg} alt="time">
-              <use xlinkHref={`${Sprite}#icon-like`} fill={'gray'}></use>
+            <svg
+              className={styles.track__time_svg}
+              alt="time"
+              onClick={handleFavorite}
+            >
+              <use
+                xlinkHref={`${Sprite}#icon-like`}
+                fill={isFavorite ? 'red' : 'gray'}
+              ></use>
             </svg>
             <span className={styles.track__time_text}>
               {duration_in_seconds}

@@ -1,9 +1,10 @@
 import React from 'react';
-import PlaylistHeader from './playlistHeader';
 import PlaylistItem from './playlistItem';
 import styles from '../css/content.module.css';
+import PlaylistHeader from './playlistHeader';
 
 function Content({ tracks, isLoading, isFetching }) {
+  console.log(tracks);
   if (isLoading || isFetching) {
     return <div className={styles.centerblock__content}>Loading...</div>;
   }
@@ -19,7 +20,16 @@ function Content({ tracks, isLoading, isFetching }) {
       <PlaylistHeader />
       <div className={styles.content__playlist}>
         {tracks.map((track) => (
-          <PlaylistItem track={track} key={track.id} />
+          <PlaylistItem
+            key={track.id}
+            id={track.id}
+            track={track}
+            name={track.name}
+            track_file={track.track_file}
+            author={track.author}
+            album={track.album}
+            duration_in_seconds={track.duration_in_seconds}
+          />
         ))}
       </div>
     </div>
