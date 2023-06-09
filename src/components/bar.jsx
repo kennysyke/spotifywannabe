@@ -1,20 +1,17 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useRef, useContext, useEffect } from 'react';
 import TrackPlay from './trackPlay';
 import Sprite from '../img/icon/sprite.svg';
 import { ThemeContext, themes } from '../dynamic/contexts/theme';
 import styles from '../css/bar.module.css';
-// import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 // import { setSelectedSongIndex } from '../actions/actions';
 
 function Bar() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
+  const selectedSong = useSelector((state) => state.selectedSong);
   const { theme } = useContext(ThemeContext);
   const audioRef = useRef(null);
-  // const currentPlaylist = useSelector((state) => state.currentPlaylist);
-  // const selectedSongIndex = useSelector((state) => state.selectedSongIndex);
-  // const selectedSong = currentPlaylist[selectedSongIndex];
-  // const dispatch = useDispatch();
 
   const playSong = () => {
     setIsPlaying(true);
@@ -52,14 +49,14 @@ function Bar() {
   //   }
   // }, [selectedSongIndex, isPlaying, currentPlaylist]);
 
-  // // useEffect(() => {
-  // //   if (selectedSong) {
-  // //     audioRef.current.src = selectedSong.track_file;
-  // //     audioRef.current.play();
-  // //     setIsPlaying(!isPlaying);
-  // //     console.log(selectedSong);
-  // //   }
-  // // }, [selectedSong]);
+  useEffect(() => {
+    if (selectedSong) {
+      audioRef.current.src = selectedSong.track_file;
+      audioRef.current.play();
+      setIsPlaying(!isPlaying);
+      console.log(selectedSong);
+    }
+  }, [selectedSong]);
 
   const togglePlay = () => {
     if (isPlaying) {
@@ -112,10 +109,8 @@ function Bar() {
               playPreviousSong={playPreviousSong}
             />
             <TrackPlay
-              // author={selectedSong ? selectedSong.author : ''}
-              // album={selectedSong ? selectedSong.album : ''}
-              author="LP"
-              album="Meteora"
+              author={selectedSong ? selectedSong.author : ''}
+              album={selectedSong ? selectedSong.album : ''}
               audioRef={audioRef}
               updateProgress={updateProgress}
             />

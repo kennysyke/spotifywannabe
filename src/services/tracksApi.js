@@ -6,7 +6,7 @@ export const tracksApi = createApi({
     baseUrl: 'https://painassasin.online',
     tagTypes: ['Tracks'],
     prepareHeaders: (headers, { getState }) => {
-      const token = getState().user.token.access;
+      const token = getState().user.access;
       //   console.log(token)
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
@@ -20,14 +20,14 @@ export const tracksApi = createApi({
         url: `/catalog/track/${id}/favorite/`,
         method: 'POST',
       }),
-      invalidatesTags: ['Tracks'],
+      invalidatesTags: ['Tracks', 'Playlist'],
     }),
     setDislike: builder.mutation({
       query: (id) => ({
         url: `/catalog/track/${id}/favorite/`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['Tracks'],
+      invalidatesTags: ['Tracks', 'Playlist'],
     }),
   }),
 });

@@ -5,10 +5,7 @@ import Sprite from '../img/icon/sprite.svg';
 import { ThemeContext } from '../dynamic/contexts/theme';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-import {
-  useSetLikeMutation,
-  useSetDislikeMutation,
-} from '../services/tracksApi';
+
 import styles from '../css/trackPlay.module.css';
 
 const TrackPlayImage = () => {
@@ -106,18 +103,6 @@ const TrackPlay = ({
   updateProgress,
   isFavourite,
 }) => {
-  const [addToFavorites, addToFavoritesResult] = useSetLikeMutation();
-  const [removeFromFavorites, removeFromFavoritesResult] =
-    useSetDislikeMutation();
-
-  const handleFavorite = () => {
-    if (isFavourite) {
-      removeFromFavorites(id);
-    } else {
-      addToFavorites(id);
-    }
-  };
-
   const mp3File = '/audio/song.mp3';
   return (
     <div className={`${styles.player__track_play} ${styles.track_play}`}>
@@ -129,10 +114,7 @@ const TrackPlay = ({
       </div>
 
       <div className={styles.track_play__like_dis}>
-        <div
-          className={`${styles.track_play__like} ${styles._btn_icon}`}
-          onClick={handleFavorite}
-        >
+        <div className={`${styles.track_play__like} ${styles._btn_icon}`}>
           <svg className={styles.track_play__like_svg} alt="like">
             <use xlinkHref={`${Sprite}#icon-like`}></use>
           </svg>

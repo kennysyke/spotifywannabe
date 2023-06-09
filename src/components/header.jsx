@@ -6,15 +6,11 @@ import { ThemeContext, themes } from '../dynamic/contexts/theme';
 
 import styles from '../css/header.module.css';
 
-function Header({ user }) {
+function Header() {
   const { theme } = useContext(ThemeContext);
 
   return (
-    <nav
-      className={
-        user ? styles.main__nav : `${styles.main__nav} ${styles.hidden}`
-      }
-    >
+    <nav className={styles.main__nav}>
       <div className={styles.nav__logo}>
         <img
           className={styles.logo__image}
