@@ -61,12 +61,12 @@ function Bar() {
         (song) => song.id === selectedSong.id
       );
       const previousSongIndex = selectedSongIndex - 1;
-
       if (previousSongIndex >= 0) {
         const previousSong = tracks[previousSongIndex];
         audioRef.current.src = previousSong.track_file;
         audioRef.current.play();
         setIsPlaying(true);
+        updateSelectedSong(previousSong);
       } else {
         console.log('error');
       }

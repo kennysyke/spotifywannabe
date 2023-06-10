@@ -7,7 +7,7 @@ export const tracksApi = createApi({
     tagTypes: ['Tracks'],
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.access;
-      //   console.log(token)
+      console.log(token);
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
       }
@@ -20,14 +20,14 @@ export const tracksApi = createApi({
         url: `/catalog/track/${id}/favorite/`,
         method: 'POST',
       }),
-      invalidatesTags: ['Tracks', 'Playlist'],
+      invalidatesTags: ['Tracks'],
     }),
     setDislike: builder.mutation({
       query: (id) => ({
         url: `/catalog/track/${id}/favorite/`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['Tracks', 'Playlist'],
+      invalidatesTags: ['Tracks'],
     }),
   }),
 });

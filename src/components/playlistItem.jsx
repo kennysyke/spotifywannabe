@@ -55,12 +55,16 @@ function PlaylistItem({
     console.log(selectSong);
   };
 
-  const handleFavorite = () => {
+  const handleFavorite = (event) => {
+    event.stopPropagation();
     if (isFavorite) {
       console.log(trackID);
       setUnlike(trackID);
+      setFavourite(false);
     } else {
+      console.log(trackID);
       setLike(trackID);
+      setFavourite(true);
     }
   };
   useEffect(() => {

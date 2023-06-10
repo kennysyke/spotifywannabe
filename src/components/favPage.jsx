@@ -8,12 +8,15 @@ import styles from '../css/center.module.css';
 import { useGetAllTracksQuery } from '../services/api';
 
 function FavPage() {
-  const { data, isLoading, isFetching } = useGetAllTracksQuery();
+  const { data: tracks, isLoading, isFetching } = useGetAllTracksQuery();
 
   const userId = Number(localStorage.getItem('userID'));
-  const TRACKS = data.filter((track) =>
+  const TRACKS = tracks.filter((track) =>
     track.stared_user.some((user) => user.id === userId)
   );
+  console.log(tracks);
+  console.log(TRACKS);
+
   return (
     <div className={styles.main__centerblock}>
       <Search />
