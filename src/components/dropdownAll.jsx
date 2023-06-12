@@ -14,7 +14,7 @@ function DropDownComponent({ tracks }) {
   );
   const genreItems = [...genreItemsSet];
 
-  const yearItems = ['Более новые', 'Более старые'];
+  const yearItems = ['Newer', 'Older'];
 
   const [openMenu, setOpenMenu] = useState(null);
 

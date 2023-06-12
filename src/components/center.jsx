@@ -16,10 +16,32 @@ function Center() {
   const filteredGenre = useSelector((state) => state.filteredTracks.genre);
   console.log(filteredGenre);
 
+  const filteredAuthor = useSelector((state) => state.filteredTracks.author);
+
+  const filteredYears = useSelector((state) => state.filteredTracks.years);
+
+  const sortByYear = (a, b) => {
+    const yearA = new Date(a.release_date).getFullYear();
+    const yearB = new Date(b.release_date).getFullYear();
+    return yearA - yearB;
+  };
+
   if (filteredGenre.length > 0) {
     filteredTracks = filteredTracks.filter((track) =>
       filteredGenre.includes(track.genre)
     );
+  }
+
+  if (filteredAuthor.length > 0) {
+    filteredTracks = filteredTracks.filter((track) =>
+      filteredAuthor.includes(track.author)
+    );
+  }
+
+  if (filteredYears === 'newer') {
+    filteredTracks = filteredTracks.sort(sortByYear);
+  } else if (filteredYears === 'older') {
+    filteredTracks = filteredTracks.sort((a, b) => sortByYear(b, a));
   }
 
   return (

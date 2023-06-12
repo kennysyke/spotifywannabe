@@ -10,6 +10,12 @@ const filteredTracksSlice = createSlice({
   name: 'filteredTracks',
   initialState,
   reducers: {
+    setFilteredYears: (state, action) => {
+      state.years = action.payload.years;
+    },
+    removeFilteredYears: (state) => {
+      state.years = [];
+    },
     setFilteredGenre: (state, action) => {
       const genre = action.payload.genre;
       if (!state.genre.includes(genre)) {
@@ -23,9 +29,7 @@ const filteredTracksSlice = createSlice({
         state.author.push(author);
       }
     },
-    setFilteredYears: (state, action) => {
-      state.years = action.payload.years;
-    },
+
     removeFilteredGenre: (state, action) => {
       const genre = action.payload.genre;
       state.genre = state.genre.filter((item) => item !== genre);
@@ -33,9 +37,6 @@ const filteredTracksSlice = createSlice({
     removeFilteredAuthor: (state, action) => {
       const author = action.payload.author;
       state.author = state.author.filter((item) => item !== author);
-    },
-    removeFilteredYears: (state) => {
-      state.years = [];
     },
   },
 });

@@ -7,8 +7,8 @@ import {
   setFilteredGenre,
   setFilteredYears,
   removeFilteredGenre,
-  removeFilteredAuthor,
-  removeFilteredYears,
+  // removeFilteredAuthor,
+  // removeFilteredYears,
 } from '../store/filteredTracksSlice';
 
 function DropdownMenu({ label, items, open, onOpen }) {
@@ -40,17 +40,9 @@ function DropdownMenu({ label, items, open, onOpen }) {
         dispatch(setFilteredGenre({ genre: item }));
       }
     } else if (label === 'году выпуска') {
-      if (selectedItem === item) {
-        handleRemoveYears();
-      } else {
-        dispatch(setFilteredYears({ years: item }));
-      }
+      dispatch(setFilteredYears({ years: item }));
     } else {
-      if (selectedItem === item) {
-        handleRemoveAuthor(item);
-      } else {
-        dispatch(setFilteredAuthor({ author: item }));
-      }
+      dispatch(setFilteredAuthor({ author: item }));
     }
   };
 
@@ -58,13 +50,10 @@ function DropdownMenu({ label, items, open, onOpen }) {
     dispatch(removeFilteredGenre({ genre: genre }));
   };
 
-  const handleRemoveAuthor = (author) => {
-    dispatch(removeFilteredAuthor({ author: author }));
-  };
+  // const handleRemoveAuthor = (author) => {
+  //   dispatch(removeFilteredAuthor({ author: author }));
+  // };
 
-  const handleRemoveYears = (years) => {
-    dispatch(removeFilteredYears({ years: years }));
-  };
   return (
     <div className={styles.dropdown}>
       <div
