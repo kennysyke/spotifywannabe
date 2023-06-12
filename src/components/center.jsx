@@ -7,9 +7,20 @@ import Bar from './bar';
 import SideBar from './sideBar';
 import styles from '../css/center.module.css';
 import { useGetAllTracksQuery } from '../services/api';
-
+import { useSelector } from 'react-redux';
 function Center() {
   const { data: tracks, isLoading, isFetching } = useGetAllTracksQuery();
+
+  let filteredTracks = tracks;
+
+  const filteredGenre = useSelector((state) => state.filteredTracks.genre);
+  console.log(filteredGenre);
+
+  if (filteredGenre.length > 0) {
+    filteredTracks = filteredTracks.filter((track) =>
+      filteredGenre.includes(track.genre)
+    );
+  }
 
   return (
     <div className={styles.container}>
@@ -18,9 +29,9 @@ function Center() {
         <div className={styles.main__centerblock}>
           <Search />
           <h2 className={styles.centerblock__h2}>Треки</h2>
-          <DropDownComponent />
+          <DropDownComponent tracks={tracks} />
           <Content
-            tracks={tracks}
+            tracks={filteredTracks}
             isLoading={isLoading}
             isFetching={isFetching}
           />

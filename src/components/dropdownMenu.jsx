@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../css/dropdownMenu.module.css';
 import stylesBtn from '../css/btn.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  setFilteredAuthor,
+  setFilteredGenre,
+  setFilteredYears,
+  removeFilteredGenre,
+  removeFilteredAuthor,
+  removeFilteredYears,
+} from '../store/filteredTracksSlice';
 
 function DropdownMenu({ label, items, open, onOpen }) {
   const [showMenu, setShowMenu] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setShowMenu(open);
@@ -18,6 +28,43 @@ function DropdownMenu({ label, items, open, onOpen }) {
     setSelectedItem(e.target.value);
   }
 
+  const selectedGenre = useSelector((state) => state.filteredTracks.genre);
+  console.log(selectedGenre);
+
+  const handleSelection = (item) => {
+    console.log(item);
+    if (label === 'жанру') {
+      if (selectedGenre.includes(item)) {
+        handleRemoveGenre();
+      } else {
+        dispatch(setFilteredGenre({ genre: item }));
+      }
+    } else if (label === 'году выпуска') {
+      if (selectedItem === item) {
+        handleRemoveYears();
+      } else {
+        dispatch(setFilteredYears({ years: item }));
+      }
+    } else {
+      if (selectedItem === item) {
+        handleRemoveAuthor(item);
+      } else {
+        dispatch(setFilteredAuthor({ author: item }));
+      }
+    }
+  };
+
+  const handleRemoveGenre = (genre) => {
+    dispatch(removeFilteredGenre({ genre: genre }));
+  };
+
+  const handleRemoveAuthor = (author) => {
+    dispatch(removeFilteredAuthor({ author: author }));
+  };
+
+  const handleRemoveYears = (years) => {
+    dispatch(removeFilteredYears({ years: years }));
+  };
   return (
     <div className={styles.dropdown}>
       <div
@@ -41,12 +88,17 @@ function DropdownMenu({ label, items, open, onOpen }) {
                         value={item}
                         checked={selectedItem === item}
                         onChange={handleRadioChange}
+                        onClick={handleSelection}
                       />
                       {item}
                     </label>
                   </li>
                 ))
-              : items.map((item, index) => <li key={index}>{item}</li>)}
+              : items.map((item, index) => (
+                  <li key={index} onClick={() => handleSelection(item)}>
+                    {item}
+                  </li>
+                ))}
           </ul>
         )}
       </div>

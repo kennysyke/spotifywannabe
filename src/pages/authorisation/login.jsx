@@ -64,7 +64,6 @@ function LoginForm({ setUser }) {
       await getToken({ email, password })
         .unwrap()
         .then((tokenRes) => {
-          localStorage.setItem('userID', tokenRes.id);
           localStorage.setItem('token', tokenRes.refresh);
           dispatch(setRefresh({ refresh: tokenRes.refresh }));
           dispatch(setAccess({ access: tokenRes.access }));

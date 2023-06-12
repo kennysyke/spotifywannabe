@@ -3,25 +3,17 @@ import DropdownMenu from './dropdownMenu';
 
 import styles from '../css/dropdownAll.module.css';
 
-function DropDownComponent() {
-  const artistItems = [
-    'Artist 1',
-    'Artist 2',
-    'Стрелки',
-    'Серебро',
-    'Artist 3',
-    'Artist 2',
-    'Artist 3',
-    'Artist 2',
-    'Artist 3',
-    'Artist 2',
-    'Artist 3',
-    'Artist 2',
-    'Artist 3',
-    'Artist 2',
-    'Artist 3',
-  ];
-  const genreItems = ['Genre 1', 'Genre 2', 'Genre 3'];
+function DropDownComponent({ tracks }) {
+  const artistItemsSet = new Set(
+    tracks ? tracks.map((track) => track.author) : []
+  );
+  const artistItems = [...artistItemsSet];
+
+  const genreItemsSet = new Set(
+    tracks ? tracks.map((track) => track.genre) : []
+  );
+  const genreItems = [...genreItemsSet];
+
   const yearItems = ['Более новые', 'Более старые'];
 
   const [openMenu, setOpenMenu] = useState(null);

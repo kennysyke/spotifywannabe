@@ -3,6 +3,7 @@ import { api } from '../services/api';
 import { tracksApi } from '../services/tracksApi';
 import authReducer from './authSlice';
 import selectedSongReducer from './selectSongSlice';
+import filteredTracksReducer from './filteredTracksSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     [tracksApi.reducerPath]: tracksApi.reducer,
     auth: authReducer,
     selectedSong: selectedSongReducer,
+    filteredTracks: filteredTracksReducer,
   },
 
   middleware: (getDefaultMiddleware) =>
