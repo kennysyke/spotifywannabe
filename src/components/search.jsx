@@ -44,13 +44,18 @@ function Search({ tracks }) {
         value={searchTerm}
         onChange={handleSearch}
       />
-      <ul style={{ display: searchTerm ? 'block' : 'none' }}>
-        {filteredTracks.map((track, index) => (
-          <li key={index} onClick={() => handleTrackClick(track)}>
-            {track.name}
-          </li>
-        ))}
-      </ul>
+      {searchTerm && (
+        <ul
+          className={styles.dropdown_menu}
+          // style={{ display: searchTerm ? 'block' : 'none' }}
+        >
+          {filteredTracks.map((track, index) => (
+            <li key={index} onClick={() => handleTrackClick(track)}>
+              {track.name}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

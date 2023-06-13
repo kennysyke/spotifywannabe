@@ -1,4 +1,10 @@
-import React, { useState, useRef, useContext, useEffect } from 'react';
+import React, {
+  useState,
+  useRef,
+  useContext,
+  useEffect,
+  useCallback,
+} from 'react';
 import TrackPlay from './trackPlay';
 import Sprite from '../img/icon/sprite.svg';
 import { ThemeContext, themes } from '../dynamic/contexts/theme';
@@ -17,8 +23,34 @@ function Bar() {
 
   const selectedSong = useSelector((state) => state.selectedSong);
   const audioRef = useRef(null);
+  const progressBarRef = useRef();
 
   const { data: tracks } = useGetAllTracksQuery();
+
+  const playAnimationRef = useRef();
+
+  const repeat = useCallback(() => {
+    if (audioRef.current) {
+      const currentTime = audioRef.current.currentTime;
+
+      progressBarRef.current.value = currentTime;
+      progressBarRef.current.style.setProperty(
+        '--range-progress',
+        `${(progressBarRef.current.value / audioRef.current.duration) * 100}%`
+      );
+
+      playAnimationRef.current = requestAnimationFrame(repeat);
+    }
+  }, [audioRef, progressBarRef]);
+
+  useEffect(() => {
+    if (isPlaying) {
+      audioRef.current.play();
+    } else {
+      audioRef.current.pause();
+    }
+    playAnimationRef.current = requestAnimationFrame(repeat);
+  }, [isPlaying, audioRef, repeat]);
 
   useEffect(() => {
     if (selectedSong) {
@@ -118,7 +150,12 @@ function Bar() {
       style={{ backgroundColor: theme.background, color: theme.color }}
     >
       <div className={styles.bar__content}>
-        <PlayerProgress progress={progress} onClick={handleClickProgress} />
+        <PlayerProgress
+          progress={progress}
+          onClick={handleClickProgress}
+          audioRef={audioRef}
+          progressBarRef={progressBarRef}
+        />
         <div className={styles.bar__player_block}>
           <div className={`${styles.bar__player} player`}>
             <PlayerControls
@@ -149,26 +186,19 @@ function Bar() {
   );
 }
 
-function PlayerProgress({ progress, onClick }) {
-  const progressBarRef = useRef(null);
-
-  const handleClick = (event) => {
-    const progressBar = progressBarRef.current;
-    const boundingRect = progressBar.getBoundingClientRect();
-    const clickedX = event.clientX - boundingRect.left;
-    const totalWidth = boundingRect.width;
-    const clickedPercentage = (clickedX / totalWidth) * 100;
-
-    onClick(clickedPercentage);
+function PlayerProgress({ audioRef, progressBarRef }) {
+  const handleProgressChange = () => {
+    audioRef.current.currentTime = progressBarRef.current.value;
   };
-
   return (
-    <div
+    <input
+      type="range"
+      defaultValue="0"
       className={styles.bar__player_progress}
-      style={{ width: `${progress}%` }}
-      onClick={handleClick}
+      // style={{ width: `${progress}%` }}
+      onChange={handleProgressChange}
       ref={progressBarRef}
-    ></div>
+    />
   );
 }
 

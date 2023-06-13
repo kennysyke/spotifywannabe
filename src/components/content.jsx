@@ -29,7 +29,6 @@ function Content({ tracks, isLoading, isFetching }) {
             author={track.author}
             album={track.album}
             duration_in_seconds={track.duration_in_seconds}
-            isLoading={isLoading}
           />
         ))}
       </div>

@@ -18,7 +18,7 @@ function PlaylistPage() {
 
   const { data, isLoading, isFetching } = useGetSelectionByIdQuery(id);
 
-  const tracks = data?.items; // Access items only if data exists
+  const tracks = data?.items;
   console.log(tracks);
 
   return (
@@ -27,7 +27,15 @@ function PlaylistPage() {
         <Header />
         <div className={styles.main__centerblock}>
           <Search />
-          <h2 className={styles.centerblock__h2}>Плейлист</h2>
+          <h2 className={styles.centerblock__h2}>
+            {id === 1
+              ? 'Плейлист дня'
+              : id === 2
+              ? '100 танцевальных хитов'
+              : id === 3
+              ? 'Инди-заряд'
+              : 'Плейлист дня'}
+          </h2>
           <DropDownComponent />
           <Content
             tracks={tracks}
