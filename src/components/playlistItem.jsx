@@ -22,13 +22,13 @@ function PlaylistItem({
   author,
   album,
   duration_in_seconds,
+  isLoading,
 }) {
   const { id: trackID, stared_user } = track;
   const [setLike] = useSetLikeMutation();
   const [setUnlike] = useSetDislikeMutation();
   const dispatch = useDispatch();
 
-  const [isLoading, setIsLoading] = useState(true);
   const { theme } = useContext(ThemeContext);
 
   const userId = Number(localStorage.getItem('userID'));
@@ -67,13 +67,6 @@ function PlaylistItem({
       setFavourite(true);
     }
   };
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <div className={styles.playlist__item} onClick={handleSelectSong}>

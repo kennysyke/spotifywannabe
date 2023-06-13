@@ -11,20 +11,25 @@ import { useSelector } from 'react-redux';
 function Center() {
   const { data: tracks, isLoading, isFetching } = useGetAllTracksQuery();
 
-  let filteredTracks = tracks;
+  let filteredTracks = tracks ?? [];
 
   const filteredGenre = useSelector((state) => state.filteredTracks.genre);
-  console.log(filteredGenre);
-
   const filteredAuthor = useSelector((state) => state.filteredTracks.author);
-
   const filteredYears = useSelector((state) => state.filteredTracks.years);
+  const searchSelected = useSelector((state) => state.filteredTracks.name);
+  console.log(searchSelected);
 
   const sortByYear = (a, b) => {
     const yearA = new Date(a.release_date).getFullYear();
     const yearB = new Date(b.release_date).getFullYear();
     return yearA - yearB;
   };
+
+  if (searchSelected.length > 0) {
+    filteredTracks = filteredTracks.filter((track) =>
+      searchSelected.includes(track.name)
+    );
+  }
 
   if (filteredGenre.length > 0) {
     filteredTracks = filteredTracks.filter((track) =>
@@ -38,10 +43,11 @@ function Center() {
     );
   }
 
-  if (filteredYears === 'newer') {
-    filteredTracks = filteredTracks.sort(sortByYear);
-  } else if (filteredYears === 'older') {
-    filteredTracks = filteredTracks.sort((a, b) => sortByYear(b, a));
+  if (filteredYears === 'Newer') {
+    filteredTracks = [...filteredTracks].sort(sortByYear);
+    console.log(filteredTracks);
+  } else if (filteredYears === 'Older') {
+    filteredTracks = [...filteredTracks].sort((a, b) => sortByYear(b, a));
   }
 
   return (
@@ -49,7 +55,7 @@ function Center() {
       <main className={styles.main}>
         <Header />
         <div className={styles.main__centerblock}>
-          <Search />
+          <Search tracks={tracks} />
           <h2 className={styles.centerblock__h2}>Треки</h2>
           <DropDownComponent tracks={tracks} />
           <Content

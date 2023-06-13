@@ -10,6 +10,8 @@ import { selectSong } from '../store/selectSongSlice';
 function Bar() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [isShuffleOn, setIsShuffleOn] = useState(false);
+  const [isRepeatOn, setIsRepeatOn] = useState(false);
   const dispatch = useDispatch();
   const { theme } = useContext(ThemeContext);
 
@@ -17,10 +19,6 @@ function Bar() {
   const audioRef = useRef(null);
 
   const { data: tracks } = useGetAllTracksQuery();
-
-  // const selectedSongIndex = tracks.findIndex(
-  //   (song) => song.id === selectedSong.id
-  // );
 
   useEffect(() => {
     if (selectedSong) {
@@ -40,7 +38,14 @@ function Bar() {
       const selectedSongIndex = tracks.findIndex(
         (song) => song.id === selectedSong.id
       );
-      const nextSongIndex = selectedSongIndex + 1;
+      let nextSongIndex;
+      if (isShuffleOn) {
+        nextSongIndex = Math.floor(Math.random() * tracks.length);
+      } else if (isRepeatOn) {
+        nextSongIndex = selectedSongIndex;
+      } else {
+        nextSongIndex = selectedSongIndex + 1;
+      }
       if (nextSongIndex < tracks.length) {
         const nextSong = tracks[nextSongIndex];
         console.log(nextSong);
@@ -109,7 +114,7 @@ function Bar() {
 
   return (
     <div
-      className={styles.bar}
+      className={selectedSong ? styles.bar : styles.hidden}
       style={{ backgroundColor: theme.background, color: theme.color }}
     >
       <div className={styles.bar__content}>
@@ -121,6 +126,10 @@ function Bar() {
               togglePlay={togglePlay}
               playNextSong={playNextSong}
               playPreviousSong={playPreviousSong}
+              isShuffleOn={isShuffleOn}
+              setIsShuffleOn={setIsShuffleOn}
+              isRepeatOn={isRepeatOn}
+              setIsRepeatOn={setIsRepeatOn}
             />
             <TrackPlay
               author={selectedSong ? selectedSong.author : ''}
@@ -168,14 +177,21 @@ function PlayerControls({
   togglePlay,
   playNextSong,
   playPreviousSong,
+  isShuffleOn,
+  setIsShuffleOn,
+  isRepeatOn,
+  setIsRepeatOn,
 }) {
   return (
     <div className={styles.player__controls}>
       <PlayerBtnPrev playPreviousSong={playPreviousSong} />
       <PlayerBtnPlay isPlaying={isPlaying} togglePlay={togglePlay} />
       <PlayerBtnNext playNextSong={playNextSong} />
-      <PlayerBtnRepeat />
-      <PlayerBtnShuffle />
+      <PlayerBtnRepeat isRepeatOn={isRepeatOn} setIsRepeatOn={setIsRepeatOn} />
+      <PlayerBtnShuffle
+        isShuffleOn={isShuffleOn}
+        setIsShuffleOn={setIsShuffleOn}
+      />
     </div>
   );
 }
@@ -213,9 +229,15 @@ function PlayerBtnNext({ playNextSong }) {
   );
 }
 
-function PlayerBtnRepeat() {
+function PlayerBtnRepeat({ isRepeatOn, setIsRepeatOn }) {
+  const handleRepeatClick = () => {
+    setIsRepeatOn(!isRepeatOn);
+  };
   return (
-    <div className={`${styles.player__btn_repeat} ${styles._btn_icon}`}>
+    <div
+      className={`${styles.player__btn_repeat} ${styles._btn_icon}`}
+      onClick={handleRepeatClick}
+    >
       <svg className={styles.player__btn_repeat_svg} alt="repeat">
         <use xlinkHref={`${Sprite}#icon-repeat`}></use>
       </svg>
@@ -223,9 +245,15 @@ function PlayerBtnRepeat() {
   );
 }
 
-function PlayerBtnShuffle() {
+function PlayerBtnShuffle({ isShuffleOn, setIsShuffleOn }) {
+  const handleShuffleClick = () => {
+    setIsShuffleOn(!isShuffleOn);
+  };
   return (
-    <div className={`${styles.player__btn_shuffle} ${styles._btn_icon}`}>
+    <div
+      className={`${styles.player__btn_shuffle} ${styles._btn_icon}`}
+      onClick={handleShuffleClick}
+    >
       <svg className={styles.player__btn_shuffle_svg} alt="shuffle">
         <use xlinkHref={`${Sprite}#icon-shuffle`}></use>
       </svg>

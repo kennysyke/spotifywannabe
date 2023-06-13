@@ -21,6 +21,7 @@
     margin: 0 auto;
     position: relative;
     background-color: var(--page-background);
+    overflow-y: scroll;
   }
 
 .main {

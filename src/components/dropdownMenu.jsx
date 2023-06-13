@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../css/dropdownMenu.module.css';
 import stylesBtn from '../css/btn.module.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   setFilteredAuthor,
   setFilteredGenre,
   setFilteredYears,
-  removeFilteredGenre,
-  // removeFilteredAuthor,
-  // removeFilteredYears,
 } from '../store/filteredTracksSlice';
 
 function DropdownMenu({ label, items, open, onOpen }) {
@@ -24,35 +21,23 @@ function DropdownMenu({ label, items, open, onOpen }) {
     setShowMenu(!showMenu);
     onOpen(label);
   }
+
   function handleRadioChange(e) {
     setSelectedItem(e.target.value);
+    const selectedYear = e.target.value;
+    console.log(selectedYear);
+    dispatch(setFilteredYears({ years: selectedYear }));
   }
-
-  const selectedGenre = useSelector((state) => state.filteredTracks.genre);
-  console.log(selectedGenre);
 
   const handleSelection = (item) => {
     console.log(item);
     if (label === 'жанру') {
-      if (selectedGenre.includes(item)) {
-        handleRemoveGenre();
-      } else {
-        dispatch(setFilteredGenre({ genre: item }));
-      }
-    } else if (label === 'году выпуска') {
-      dispatch(setFilteredYears({ years: item }));
-    } else {
+      dispatch(setFilteredGenre({ genre: item }));
+    } else if (label === 'исполнителю') {
       dispatch(setFilteredAuthor({ author: item }));
+      console.log(item);
     }
   };
-
-  const handleRemoveGenre = (genre) => {
-    dispatch(removeFilteredGenre({ genre: genre }));
-  };
-
-  // const handleRemoveAuthor = (author) => {
-  //   dispatch(removeFilteredAuthor({ author: author }));
-  // };
 
   return (
     <div className={styles.dropdown}>
