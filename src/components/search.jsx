@@ -24,9 +24,11 @@ function Search({ tracks }) {
 
   const handleTrackClick = (track) => {
     console.log(track);
-    dispatch(setSearchedTrack(track.name));
+    dispatch(setSearchedTrack({ name: track.name }));
     console.log(track.name);
+    setSearchTerm('');
   };
+
   return (
     <div className={styles.centerblock__search}>
       <svg className={styles.search__svg}>

@@ -18,7 +18,6 @@ export const api = createApi({
       query: (body) => ({
         url: '/user/signup/',
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: body,
       }),
     }),

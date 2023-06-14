@@ -8,7 +8,6 @@ import SideBar from './sideBar';
 import styles from '../css/center.module.css';
 import { useGetAllTracksQuery } from '../services/api';
 import { useSelector } from 'react-redux';
-
 function Center() {
   const { data: tracks, isLoading, isFetching } = useGetAllTracksQuery();
 

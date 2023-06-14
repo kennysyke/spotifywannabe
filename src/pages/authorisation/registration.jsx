@@ -1,11 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from '../../css/login.module.css';
 import logoBlack from '../../img/logo_black.png';
 import { useSignupMutation } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
-
 
 function RegistrationForm() {
   const [email, setEmail] = useState('');
@@ -35,7 +34,7 @@ function RegistrationForm() {
     event.preventDefault();
 
     if (password !== confirmPassword) {
-      console.log('Passwords do not match');
+      alert('Passwords do not match');
       return;
     }
     await signUp({
@@ -44,8 +43,15 @@ function RegistrationForm() {
       password: password,
     }).unwrap();
   };
-  if (isSuccess) navigate('/login');
-  if (isError) console.log(isError);
+  useEffect(() => {
+    if (isSuccess) {
+      navigate('/login');
+    }
+  }, [isSuccess, navigate]);
+
+  if (isError) {
+    console.log(isError);
+  }
   // asdfasdf321
   return (
     <div className={styles.container}>
