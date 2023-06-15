@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../css/dropdownMenu.module.css';
 import stylesBtn from '../css/btn.module.css';
+import { useDispatch } from 'react-redux';
+import {
+  setFilteredAuthor,
+  setFilteredGenre,
+  setFilteredYears,
+} from '../store/filteredTracksSlice';
 
 function DropdownMenu({ label, items, open, onOpen }) {
   const [showMenu, setShowMenu] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setShowMenu(open);
@@ -14,9 +21,23 @@ function DropdownMenu({ label, items, open, onOpen }) {
     setShowMenu(!showMenu);
     onOpen(label);
   }
+
   function handleRadioChange(e) {
     setSelectedItem(e.target.value);
+    const selectedYear = e.target.value;
+    console.log(selectedYear);
+    dispatch(setFilteredYears({ years: selectedYear }));
   }
+
+  const handleSelection = (item) => {
+    console.log(item);
+    if (label === 'жанру') {
+      dispatch(setFilteredGenre({ genre: item }));
+    } else if (label === 'исполнителю') {
+      dispatch(setFilteredAuthor({ author: item }));
+      console.log(item);
+    }
+  };
 
   return (
     <div className={styles.dropdown}>
@@ -41,12 +62,17 @@ function DropdownMenu({ label, items, open, onOpen }) {
                         value={item}
                         checked={selectedItem === item}
                         onChange={handleRadioChange}
+                        onClick={handleSelection}
                       />
                       {item}
                     </label>
                   </li>
                 ))
-              : items.map((item, index) => <li key={index}>{item}</li>)}
+              : items.map((item, index) => (
+                  <li key={index} onClick={() => handleSelection(item)}>
+                    {item}
+                  </li>
+                ))}
           </ul>
         )}
       </div>

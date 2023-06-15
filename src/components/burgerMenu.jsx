@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ThemeSwitcher } from '../dynamic/theme-switcher';
+import { userLogout } from '../store/authSlice';
 
 import styles from '../css/burgerMenu.module.css';
 
@@ -9,6 +10,11 @@ function BurgerMenu() {
 
   const handleBurgerClick = () => {
     setIsOpen((prev) => !prev);
+  };
+
+  const handleLogout = () => {
+    userLogout();
+    localStorage.clear();
   };
 
   return (
@@ -26,12 +32,16 @@ function BurgerMenu() {
             </Link>
           </li>
           <li className={styles.menu__item}>
-            <Link to="/" className={styles.menu__link}>
+            <Link to="/favourite" className={styles.menu__link}>
               Мой плейлист
             </Link>
           </li>
           <li className={styles.menu__item}>
-            <Link to="/login" className={styles.menu__link}>
+            <Link
+              to="/login"
+              className={styles.menu__link}
+              onClick={handleLogout}
+            >
               Выйти
             </Link>
           </li>

@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 import React, { useState, useEffect, useContext } from 'react';
 import Sprite from '../img/icon/sprite.svg';
 import { ThemeContext } from '../dynamic/contexts/theme';
@@ -93,7 +95,14 @@ const TrackPlayAlbum = ({ album }) => {
   );
 };
 
-const TrackPlay = ({ author, album, audioRef, updateProgress }) => {
+const TrackPlay = ({
+  id,
+  author,
+  album,
+  audioRef,
+  updateProgress,
+  isFavourite,
+}) => {
   const mp3File = '/audio/song.mp3';
   return (
     <div className={`${styles.player__track_play} ${styles.track_play}`}>
