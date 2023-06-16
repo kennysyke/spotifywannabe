@@ -18,21 +18,16 @@ const server = setupServer(
     );
   })
 );
-
 const storeRef = setupApiStore(useGetAllTracksQuery);
-
 describe('Integration Test', () => {
   beforeAll(() => server.listen());
   afterEach(() => server.resetHandlers());
   afterAll(() => server.close());
-
   it('should fetch all tracks successfully', async () => {
     render(<Center />, { wrapper: storeRef.wrapper });
-
     await waitFor(() =>
       expect(storeRef.store.getState().tracks).not.toBeNull()
     );
-
     const tracks = storeRef.store.getState().tracks;
     expect(tracks).toBeDefined();
     expect(tracks.length).toBe(2);
@@ -52,9 +47,7 @@ describe('Integration Test', () => {
         }
       )
     );
-
     const { result } = render(<Center />, { wrapper: storeRef.wrapper });
-
     await waitFor(() => {
       expect(result.current.tracks).toBeUndefined();
       expect(result.current.error).toBeDefined();
