@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, waitFor } from '@testing-library/react';
 import { setupApiStore } from './test-utils';
-import { useGetFavTracksQuery } from '../services/api';
+import { useGetAllTracksQuery } from '../services/api';
 import Center from './center';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
@@ -19,7 +19,7 @@ const server = setupServer(
   })
 );
 
-const storeRef = setupApiStore(useGetFavTracksQuery);
+const storeRef = setupApiStore(useGetAllTracksQuery);
 
 describe('Integration Test', () => {
   beforeAll(() => server.listen());
@@ -40,23 +40,26 @@ describe('Integration Test', () => {
     expect(tracks[1]).toEqual({ id: 2, name: 'Track 2' });
   });
 
-  // it('should handle fetch error', async () => {
-  //   server.use(
-  //     rest.get(
-  //       'https://painassasin.online/catalog/track/all/',
-  //       (req, res, ctx) => {
-  //         return res(ctx.status(500));
-  //       }
-  //     )
-  //   );
+  it('should handle fetch error', async () => {
+    server.use(
+      rest.get(
+        'https://painassasin.online/catalog/track/all/',
+        (req, res, ctx) => {
+          return res(
+            ctx.status(500),
+            ctx.json({ message: 'Internal Server Error' })
+          );
+        }
+      )
+    );
 
-  //   const { query } = setup();
-  //   const { result, waitForNextUpdate } = query();
+    const { result } = render(<Center />, { wrapper: storeRef.wrapper });
 
-  //   await waitForNextUpdate();
-
-  //   expect(result.current.data).toBeUndefined();
-  //   expect(result.current.error).toBeDefined();
-  //   expect(result.current.isLoading).toBe(false);
-  // });
+    await waitFor(() => {
+      expect(result.current.tracks).toBeUndefined();
+      expect(result.current.error).toBeDefined();
+      expect(result.current.error.message).toBe('Internal Server Error');
+      expect(result.current.isLoading).toBe(false);
+    });
+  });
 });
