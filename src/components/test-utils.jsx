@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { render, cleanup } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { ThemeContext, themes } from '../dynamic/contexts/theme';
 
-const AllProviders = ({ children }) => {
+export const AllProviders = ({ children }) => {
   const [currentTheme, setCurrentTheme] = useState(themes.light);
 
   const toggleTheme = () => {
@@ -49,7 +49,7 @@ export const setupApiStore = (api, extraReducers, withoutListeners) => {
 
   let cleanupListeners;
 
-  beforeEach(() => {
+  const setup = () => {
     const store = getStore();
     refObj.store = store;
     refObj.wrapper = withStoreProvider(store);
@@ -57,9 +57,9 @@ export const setupApiStore = (api, extraReducers, withoutListeners) => {
     if (!withoutListeners) {
       cleanupListeners = setupListeners(store.dispatch);
     }
-  });
+  };
 
-  afterEach(() => {
+  const cleanup = () => {
     cleanup();
 
     if (!withoutListeners) {
@@ -67,9 +67,9 @@ export const setupApiStore = (api, extraReducers, withoutListeners) => {
     }
 
     refObj.store.dispatch(api.util.resetApiState());
-  });
+  };
 
-  return refObj;
+  return { ...refObj, setup, cleanup };
 };
 
 export const customRender = (ui, options) =>

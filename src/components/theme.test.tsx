@@ -2,6 +2,7 @@ import React from 'react';
 import { customRender } from './test-utils';
 import { screen, fireEvent } from '@testing-library/react';
 import { ThemeSwitcher } from '../dynamic/theme-switcher/index';
+import '@testing-library/jest-dom';
 
 describe('<ThemeSwitcher />', () => {
   it('should change theme by click', () => {
