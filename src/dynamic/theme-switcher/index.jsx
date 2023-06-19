@@ -10,7 +10,11 @@ export const ThemeSwitcher = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <div className={styles.menu__button} onClick={toggleTheme}>
+    <div
+      className={styles.menu__button}
+      onClick={toggleTheme}
+      data-testid="theme-switcher-button"
+    >
       <svg className={styles.player__btn_play_svg} alt="play">
         <use
           xlinkHref={`${Sprite}#icon-${
