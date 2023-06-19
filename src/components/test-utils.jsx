@@ -30,15 +30,14 @@ export function withStoreProvider(store) {
   };
 }
 
-export const setupApiStore = (api, extraReducers, withoutListeners) => {
+export function setupApiStore(api, extraReducers, withoutListeners) {
   const getStore = () =>
     configureStore({
-      reducer: { [api.reducerPath]: api.reducer, ...extraReducers },
-      middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-          serializableCheck: false,
-          immutableCheck: false,
-        }).concat(api.middleware),
+      reducer: { api: api.reducer, ...extraReducers },
+      middleware: (gdm) =>
+        gdm({ serializableCheck: false, immutableCheck: false }).concat(
+          api.middleware
+        ),
     });
 
   const initialStore = getStore();

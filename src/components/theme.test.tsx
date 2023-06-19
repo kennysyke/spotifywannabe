@@ -5,22 +5,23 @@ import { ThemeSwitcher } from '../dynamic/theme-switcher/index';
 import '@testing-library/jest-dom';
 
 describe('<ThemeSwitcher />', () => {
-  it('should change theme by click', () => {
+  it('should change theme by click', async () => {
     customRender(<ThemeSwitcher />);
 
     const divElement = screen.getByTestId('theme-switcher-button');
+    const useElement = divElement.querySelector('use');
 
     expect(divElement).toBeInTheDocument();
-    expect(divElement).toHaveAttribute(
-      'xlinkHref',
-      expect.stringContaining('icon-light')
+    expect(useElement).toHaveAttribute(
+      'xlink:href',
+      expect.stringContaining('sprite.svg#icon-light')
     );
 
     fireEvent.click(divElement);
 
-    expect(divElement).toHaveAttribute(
-      'xlinkHref',
-      expect.stringContaining('icon-dark')
+    expect(useElement).toHaveAttribute(
+      'xlink:href',
+      expect.stringContaining('sprite.svg#icon-dark')
     );
   });
 });
